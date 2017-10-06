@@ -1,0 +1,70 @@
+<view class="container">
+
+<view class="zan-form" style='magin-top: 20rpx'>
+  <view class="zan-cell zan-form__item">
+    <text class="zan-form__title">选择区域</text>
+    <view class="zan-form__input zan-cell__bd">
+        <picker
+          mode="selector"
+          range="{{ area }}"
+          value="{{ areaIndex }}"
+          bindchange="onAreaChange"
+        >
+          {{ area[areaIndex] }}
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class="zan-form" style='margin-top: 20rpx'>
+    <view class="zan-cell zan-form__item">
+      <input
+        class="zan-form__input zan-cell__bd"
+        placeholder="请输入手机号码"
+      />
+    </view>
+    <view class="zan-cell zan-cell__no-pading zan-form__item zan-cell--last-child">
+      <view class="zan-cell__bd zan-cell__bd_padding">
+        <input
+          class="zan-form__input"
+          type="text"
+          maxlength="7"
+          placeholder="请输入短信验证码"
+        />
+      </view>
+      <view class="zan-cell__ft">
+        <button class="zan-btn zan-btn--large zan-btn--primary">获取验证码                </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="zan-panel-title">
+    <text>收不到验证短信？</text>
+    <text class="font_highlight" style='text-decoration:underline'>联系客服</text>
+  </view>
+
+  <view class="zan-form" style="margin-top: 20px">
+    <view class="zan-cell zan-form__item">
+      <input
+        class="zan-form__input zan-cell__bd"
+        placeholder="请输入登录密码"
+        type="password"
+      />
+    </view>
+    <view class="zan-cell zan-form__item zan-cell--last-child">
+      <input
+        class="zan-form__input zan-cell__bd"
+        placeholder="请再次输入登录密码"
+        type="password"
+      />
+    </view>
+  </view>
+
+  <view class="zan-panel-title">
+    <checkbox id="@+id/check_agreement"></checkbox>
+    <text>我已阅读并同意</text>
+    <text class="font_highlight">《长安出行用户使用协议》</text>
+  </view>
+
+  <button class="zan-btn zan-btn--large zan-btn--primary">下一步</button>
+</view>

@@ -4,6 +4,7 @@
   overflow: hidden;
   min-height: 100vh;
   box-sizing: border-box;
+  background: #f2f2f2;
 }
 .container::before {
   position: fixed;
@@ -18,4 +19,8 @@
 .item_icon {
   height: 60rpx;
   width: 60rpx;
+}
+
+.font_highlight {
+  color: #5199f7;
 }

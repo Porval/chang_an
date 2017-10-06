@@ -7,9 +7,9 @@ Page({
     hasLoggedIn: false,
   },
   //事件处理函数
-  bindViewTap: function() {
+  toRegister: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../register/register'
     })
   },
   onLoad: function () {

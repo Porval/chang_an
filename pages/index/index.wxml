@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="index_container">
   <text>长安出行</text>
-  <view wx:if="{{!hasLoggedIn}}" class="container"> 
+  <view wx:if="{{!hasLoggedIn}}" class="container" style='background:#1e374c'> 
     <view style="margin-top: 250rpx">
       <view class="zan-form__item login_cell">
         <image class="item_icon" src="/icons/ic_tmp.png"></image>
