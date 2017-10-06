@@ -66,5 +66,7 @@
     <text class="font-highlight">《长安出行用户使用协议》</text>
   </view>
 
-  <button class="zan-btn zan-btn--large button-primary button-page-buttom">下一步</button>
+  <button class="zan-btn zan-btn--large button-primary button-page-buttom"
+      bindtap='toNext'
+  >下一步</button>
 </view>

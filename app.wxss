@@ -21,6 +21,11 @@
   width: 60rpx;
 }
 
+.icon-large {
+  height: 100rpx;
+  width: 100rpx;
+}
+
 .font-highlight {
   color: #5199f7;
 }
@@ -35,4 +40,29 @@
   width: 100%;
   background: #ed6f2d;
   color:#ffffff;
+}
+
+.upload-cell {
+  margin: 60rpx;
+  position: relative;
+}
+
+.upload-image-sample {
+  height: 250rpx;
+  width: 100%;
+  position: absolute;
+}
+
+.image-mask {
+  position: absolute;
+  background: #a9a6a7; 
+  border: 1rpx solid #000000;
+  opacity:0.6;
+  top: 0;
+  width:100%;
+  height:250rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
