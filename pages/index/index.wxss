@@ -16,6 +16,12 @@
   color: #aaa;
 }
 
-.usermotto {
-  margin-top: 200px;
+.index_container {
+  height:100vh;
+  background: #1e374c;
+} 
+
+.login_container {
+  height: 100%;
+  margin-top: 50px;
 }
