@@ -1,8 +1,26 @@
 <!--index.wxml-->
 <view class="index_container">
-    <text>长安出行</text>
-  <view wx:if="{{!hasLoggedIn}}" class="login_container">
-    <text>登录内容</text>
+  <text>长安出行</text>
+  <view wx:if="{{!hasLoggedIn}}" class="container"> 
+    <view style="margin-top: 250rpx">
+      <view class="zan-form__item login_cell">
+        <image class="item_icon" src="/icons/ic_tmp.png"></image>
+        <input
+          class="zan-form__input zan-cell__bd"
+          placeholder="手机号"
+          style="margin-left: 100rpx"
+        />
+      </view>
+      <view class="zan-form__item login_cell">
+        <image class="item_icon" src="/icons/ic_tmp.png"></image>
+        <input
+          class="zan-form__input zan-cell__bd"
+          type="number"
+          maxlength="20"
+          placeholder="密码"
+          style="margin-left: 100rpx"
+        />
+      </view>
+    </view>
   </view>
- 
 </view>

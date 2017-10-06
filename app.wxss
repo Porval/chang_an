@@ -1,10 +1,21 @@
-/**app.wxss**/
+@import "zan_ui/index.wxss";
+
 .container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
+  overflow: hidden;
+  min-height: 100vh;
   box-sizing: border-box;
-} 
+}
+.container::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  content: ' ';
+  width: 100%;
+  height: 1rpx;
+  z-index: 5;
+}
+
+.item_icon {
+  height: 60rpx;
+  width: 60rpx;
+}
