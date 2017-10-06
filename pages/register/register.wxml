@@ -40,7 +40,7 @@
 
   <view class="zan-panel-title">
     <text>收不到验证短信？</text>
-    <text class="font_highlight" style='text-decoration:underline'>联系客服</text>
+    <text class="font-highlight" style='text-decoration:underline'>联系客服</text>
   </view>
 
   <view class="zan-form" style="margin-top: 20px">
@@ -63,8 +63,8 @@
   <view class="zan-panel-title">
     <checkbox id="@+id/check_agreement"></checkbox>
     <text>我已阅读并同意</text>
-    <text class="font_highlight">《长安出行用户使用协议》</text>
+    <text class="font-highlight">《长安出行用户使用协议》</text>
   </view>
 
-  <button class="zan-btn zan-btn--large zan-btn--primary">下一步</button>
+  <button class="zan-btn zan-btn--large button-primary button-page-buttom">下一步</button>
 </view>

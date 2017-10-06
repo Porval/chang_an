@@ -21,6 +21,18 @@
   width: 60rpx;
 }
 
-.font_highlight {
+.font-highlight {
   color: #5199f7;
+}
+
+.button-page-buttom {
+  position: fixed;
+  bottom: 0;
+  width: 100%
+}
+
+.button-primary {
+  width: 100%;
+  background: #ed6f2d;
+  color:#ffffff;
 }
