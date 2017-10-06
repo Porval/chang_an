@@ -30,7 +30,7 @@
       </view>
   </view>
 
-  <view class="upload-cell">
+  <view class="upload-cell" bindtap='onClickAddInditityImage'>
       <image class="upload-image-sample" src="/drawable/bg_identity_1.jpeg" mode="scaleToFill"></image>
       <view class="image-mask">
         <image class="icon-large" src="/drawable/ic_plus.png"></image>
@@ -38,7 +38,7 @@
       </view>
   </view>
   
-<view class="upload-cell" style='margin-top: 400rpx'>
+<view class="upload-cell" style='margin-top: 400rpx' bindtap='onClickAddInditityImage'>
       <image class="upload-image-sample" src="/drawable/bg_identity_2.jpeg" mode="scaleToFill"></image>
       <view class="image-mask">
         <image class="icon-large" src="/drawable/ic_plus.png"></image>
