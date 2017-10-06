@@ -1,21 +1,3 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
 .index_container {
   height:100vh;
   background: #1e374c;
@@ -34,4 +16,24 @@
   display: flex;
   font-size: 14px;
   align-items: center;
+}
+
+.btn_login {
+  height: 100rpx;
+  border-radius:50rpx;
+  width: 600rpx;
+  color: #1e374c;
+  align-items: center;
+  font-size: 22px;
+}
+
+.btn_register {
+  height: 100rpx;
+  width: 600rpx;
+  color: #ffffff;
+  background: #1e374c;
+  border: 2rpx solid #ffffff;
+  border-radius:50rpx;
+  align-items: center;
+  font-size: 22px;
 }

@@ -22,5 +22,7 @@
         />
       </view>
     </view>
+    <button class="btn_login" style='margin-top: 100rpx' bindtap="toLogin">登录</button>
+    <button class="btn_register" bindtap="toRegister" style='margin-top: 90rpx'>注册</button>
   </view>
 </view>
