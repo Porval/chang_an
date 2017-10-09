@@ -66,3 +66,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.item-picker-result {
+  background: #ffffff;
+  padding: 10rpx;
+  font-size: 14px;
+}

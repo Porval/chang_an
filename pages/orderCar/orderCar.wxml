@@ -20,10 +20,54 @@
       </view>
       <view style='margin-top: 20rpx'>
         <text>选择经销商</text>
+        <view> 
+          <view class="zan-form__input zan-cell__bd item-picker-result">
+            <picker
+              mode="selector"
+              range="{{ areaList }}"
+              value="{{ areaIndex }}"
+              bindchange="onAreaChanged"
+            >
+              {{ areaList[areaIndex] }}
+            </picker>
+          </view>
+          <view class="zan-form__input zan-cell__bd item-picker-result">
+            <picker
+              mode="selector"
+              range="{{ areaList }}"
+              value="{{ areaIndex }}"
+              bindchange="onGernalChanged"
+            >
+              {{ areaList[areaIndex] }}
+            </picker>
+          </view>
+        </view>
+        <view class="zan-form__input zan-cell__bd item-picker-result ">
+          <picker
+            mode="selector"
+            range="{{ shopList }}"
+            value="{{ shopIndex }}"
+            bindchange="onGernalChanged"
+          >
+            {{ shopList[shopIndex] }}
+          </picker>
+        </view>
+
       </view>
 
       <view style='margin-top: 20rpx'>
           <text>试驾车型</text>
+          <view class="zan-form__input zan-cell__bd item-picker-result">
+            <picker
+              mode="selector"
+              range="{{ carList }}"
+              value="{{ carIndex }}"
+              bindchange="onGernalChanged"
+            >
+              {{ carList[carIndex] }}
+          </picker>
+        </view>
+
       </view>
 
       <view class="zan-panel-title"  style='margin-top: 20rpx; padding-left: 0px'>
