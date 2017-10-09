@@ -78,6 +78,6 @@
     </view>
   </scroll-view>
   <button class="zan-btn zan-btn--large button-primary button-page-buttom"
-      bindtap='toNext'
+      bindtap='toOrder'
   >提交申请</button>
 </view>

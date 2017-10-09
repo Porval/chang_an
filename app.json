@@ -5,11 +5,12 @@
     "pages/identity/identity",
     "pages/driverIdentity/driverIdentity",
     "pages/identifyResult/identifyResult",
-    "pages/orderCar/orderCar"
+    "pages/orderCar/orderCar",
+    "pages/orderSuccess/orderSuccess"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgnavigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   }
 }
