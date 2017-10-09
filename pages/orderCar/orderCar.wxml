@@ -1,0 +1,30 @@
+<view class="container">
+  <scroll-view>
+    <image class="page-span" src='/drawable/order_page_span.png'></image>         <view>
+      <checkbox>男</checkbox>
+      <checkbox>女</checkbox>
+    </view>                                        
+    <text id="@id/name">张三</text>
+    <view>
+      <input></input>
+    </view>
+    <view>
+      <text>选择经销商</text>
+    </view>
+
+    <view>
+        <text>试驾车型</text>
+        
+    </view>
+
+
+    <view class="zan-panel-title">
+      <checkbox id="@+id/check_agreement"></checkbox>
+      <text>我已阅读并同意</text>
+      <text class="font-highlight">《长安出行试驾协议》</text>
+    </view>
+  </scroll-view>
+  <button class="zan-btn zan-btn--large button-primary button-page-buttom"
+      bindtap='toNext'
+  >提交申请</button>
+</view>
