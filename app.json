@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/register/register",
-    "pages/identity/identity"
+    "pages/identity/identity",
+    "pages/driverIdentity/driverIdentity",
+    "pages/identifyResult/identifyResult"
   ],
   "window": {
     "backgroundTextStyle": "light",

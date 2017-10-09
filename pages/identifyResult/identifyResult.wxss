@@ -1,0 +1,7 @@
+.item-form {
+  justify-content: space-between;
+}
+
+.text-result {
+  color: #ed6f59
+}

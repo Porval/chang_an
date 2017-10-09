@@ -6,6 +6,11 @@ Page({
   data: {
     hasLoggedIn: false,
   },
+  toLogin: function() {
+    wx.navigateTo({
+      url: '../identifyResult/identifyResult',
+    })
+  },
   //事件处理函数
   toRegister: function() {
     wx.navigateTo({
