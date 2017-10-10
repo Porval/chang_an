@@ -18,9 +18,9 @@
           type='number'
       /> 
       </view>
-      <view style='margin-top: 20rpx'>
+      <view style='margin-top: 20rpx;'>
         <text>选择经销商</text>
-        <view> 
+        <view style='display: flex'> 
           <view class="zan-form__input zan-cell__bd item-picker-result">
             <picker
               mode="selector"

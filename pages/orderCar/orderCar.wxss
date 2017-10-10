@@ -15,3 +15,7 @@
   padding:20rpx;
   margin-top:40rpx;
 }
+
+.block-picker {
+  margin: 10rpx;
+}

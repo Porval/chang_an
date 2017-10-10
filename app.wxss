@@ -70,7 +70,8 @@
 
 .item-picker-result {
   background: #ffffff;
-  padding: 10rpx;
+  padding: 15rpx;
   font-size: 14px;
+  margin: 10rpx;
   
 }
