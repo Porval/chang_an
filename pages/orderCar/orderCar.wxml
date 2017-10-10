@@ -1,5 +1,5 @@
-<view class="container">
-  <scroll-view>
+<scroll-view>
+    <view class="container">
     <image class="page-span" src='/drawable/order_page_span.png'></image>         <view class='order-content'>
       <view>
         <checkbox>先生</checkbox>
@@ -76,8 +76,10 @@
         <text class="font-highlight">《长安出行试驾协议》</text>
       </view>
     </view>
-  </scroll-view>  
-  <button class="zan-btn zan-btn--large button-primary button-page-buttom"
+    <view style='height: 70px'>
+    </view>
+  </view>
+</scroll-view>  
+<button class="zan-btn zan-btn--large button-primary button-page-buttom"
       bindtap='toOrder'
   >提交申请</button>
-</view>
