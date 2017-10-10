@@ -8,7 +8,7 @@ Page({
   },
   toLogin: function() {
     wx.navigateTo({
-      url: '../identifyResult/identifyResult',
+      url: '../rate/rate',
     })
   },
   //事件处理函数

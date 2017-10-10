@@ -6,7 +6,8 @@
     "pages/driverIdentity/driverIdentity",
     "pages/identifyResult/identifyResult",
     "pages/orderCar/orderCar",
-    "pages/orderSuccess/orderSuccess"
+    "pages/orderSuccess/orderSuccess",
+    "pages/rate/rate"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,23 @@
+/* pages/rate/rate.wxss */
+
+.block-bar {
+  padding: 20rpx;
+}
+
+.block-content {
+  background: #ffffff;
+}
+
+.star {
+  color: #ea3323;
+  margin-left: 10rpx
+}
+
+.comments-box {
+  background: #ffffff;
+  height: 400rpx;
+  margin: 10rpx;
+  margin-top: 40rpx;
+  padding: 10rpx;
+  border: 1rpx solid #000000; 
+}

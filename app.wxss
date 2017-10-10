@@ -1,4 +1,5 @@
 @import "zan_ui/index.wxss";
+@import "components/weui.wxss";
 
 .container {
   overflow: hidden;

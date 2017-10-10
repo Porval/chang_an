@@ -76,7 +76,7 @@
         <text class="font-highlight">《长安出行试驾协议》</text>
       </view>
     </view>
-  </scroll-view>
+  </scroll-view>  
   <button class="zan-btn zan-btn--large button-primary button-page-buttom"
       bindtap='toOrder'
   >提交申请</button>

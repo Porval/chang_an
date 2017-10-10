@@ -27,7 +27,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    wx.showModal({
+      title: '您有试驾订单未评价',
+      cancelText: '取消',
+      confirmText: '去评价',
+      cancelColor: '#333',
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '../rate/rate',
+          })
+        }
+      }
+    })
   },
 
   /**
