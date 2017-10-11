@@ -1,4 +1,26 @@
 // pages/register/register.js
+
+function countdown(that) {  
+  var second = that.data.second  
+  if (second == 0) {  
+    that.setData({  
+      btnText: "获取验证码",
+      btnStyle: "zan-btn--primary",
+      second: 5
+    });  
+  return ;  
+ }  
+
+ var time = setTimeout(function() {  
+    that.setData({  
+      second: second - 1,
+      btnText: (that.data.second -  1) + "秒后可重发",
+      btnStyle: "btn-disabled"
+    });  
+    countdown(that);  
+ }, 1000)  
+}  
+
 Page({
 
   /**
@@ -11,7 +33,10 @@ Page({
     smsCode: null,
     psw: null,
     confirmPsw: null,
-    isCheckedAgreement: false
+    isCheckedAgreement: false,
+    second: 5,
+    btnText: "获取验证码",
+    btnStyle: "zan-btn--primary"
   },
 
   /**
@@ -56,6 +81,12 @@ Page({
       this.setData({
           areaIndex: e.detail.value
       })
+  },
+
+  toSendSmsCode: function() {
+    if(this.data.btnStyle == "zan-btn--primary") {
+      countdown(this); 
+    }
   },
 
   toNext: function () {
