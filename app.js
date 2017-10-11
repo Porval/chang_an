@@ -19,7 +19,7 @@ App({
   		this.globalData.hasToken = true;
   		this.globalData.token = token;
   		this.storage.set('app:token', {
-            accessToken: access_token,
+            accessToken: token,
             mobile: mobile
           });
   	}

@@ -17,7 +17,13 @@ Page({
         password: this.data.userPsw
       },
       success: (res) => {
-          console.log("success " + res);
+          console.log("login success " + res);
+          if(res.access_token) {
+              app.setToken(res.access_token, this.data.userPhone);
+              wx.redirectTo({
+                url: '../identifyResult/identifyResult'
+              })
+          }
         }
       });
     console.log("usePhone " + this.data.userPhone);
@@ -39,10 +45,10 @@ Page({
     })
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        hasLoggedIn: true
-      })
+    if (app.globalData.hasToken) {
+       wx.redirectTo({
+                url: '../identifyResult/identifyResult'
+        }) 
     }
 
     this.service = service(this);
