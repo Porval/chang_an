@@ -17,7 +17,7 @@ Page({
         password: this.data.userPsw
       },
       success: (res) => {
-          
+          console.log("success " + res);
         }
       });
     console.log("usePhone " + this.data.userPhone);

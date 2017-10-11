@@ -8,19 +8,21 @@
         <input
           class="zan-form__input zan-cell__bd"
           placeholder="手机号"
-          style="margin-left: 100rpx"
+          style="margin-left: 100rpx; -webkit-text-fill-color: #ffffff"
           bindinput="phoneInput"
+          type="number"
+          -webkit-text-fill-color="#ffffff"
         />
       </view>
       <view class="zan-form__item login_cell">
         <image class="item_icon" src="/drawable/ic_tmp.png"></image>
         <input
           class="zan-form__input zan-cell__bd"
-          type="number"
+          type="password"
           maxlength="20"
           placeholder="密码"
-          style="margin-left: 100rpx"
-          bindinput="pswInput"
+          style="margin-left: 100rpx; -webkit-text-fill-color: #ffffff"
+          bindinput="pswInput"          
         />
       </view>
     </view>

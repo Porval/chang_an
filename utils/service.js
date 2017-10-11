@@ -52,8 +52,8 @@ module.exports = function (app) {
         data: options.data,
         header: options.header,
         success: (res) => {
-          if (res.data.response) {
-            success(res.data.response);
+          if (res.data.success == true) {
+            success(res.data.data);
           } else {
             try {
               // 如果access_token失效，就将该请求挂起，并在重新登录成功后
