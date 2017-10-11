@@ -75,3 +75,8 @@
   margin: 10rpx;
   
 }
+
+.btn-disabled {
+   background: #999999;
+   color: #ffffff;
+}
