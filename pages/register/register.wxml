@@ -43,7 +43,7 @@
 
   <view class="zan-panel-title">
     <text>收不到验证短信？</text>
-    <text class="font-highlight" style='text-decoration:underline'>联系客服</text>
+    <text class="font-highlight" style='text-decoration:underline' bindtap='toConnectService'>联系客服</text>
   </view>
 
   <view class="zan-form" style="margin-top: 20px">

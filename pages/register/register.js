@@ -83,6 +83,24 @@ Page({
       })
   },
 
+  toConnectService: function(e) {
+    console.log(e);
+    wx.showModal({
+      title: '提示',
+      content: '客服电话: 02388256088\n转9，以#号键结束',
+      cancelText: '取消',
+      confirmText: '拨打',
+      confirmColor: '#ed6f2d',
+      success: function (res) {
+        if (res.confirm) {
+          wx.makePhoneCall({
+             phoneNumber: '02388256088'
+          });
+        }
+      }
+    })
+  },
+
   toSendSmsCode: function() {
     if(this.data.btnStyle == "zan-btn--primary") {
       countdown(this); 
