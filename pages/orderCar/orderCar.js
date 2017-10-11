@@ -70,6 +70,12 @@ Page({
   
   },
 
+  onClickAgreement: function() {
+    wx.navigateTo({
+      url: '../agreement/agreement',
+    })
+  },
+  
   toOrder: function() {
     wx.navigateTo({
       url: '../orderSuccess/orderSuccess',

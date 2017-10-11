@@ -1,0 +1,10 @@
+<scroll-view>
+  <view class='container'>
+    <text>协议协议协议协议协议协议协议</text>
+  </view>
+  <view style='height: 60px'>
+  </view>
+</scroll-view>
+<button class="zan-btn zan-btn--large button-page-buttom {{btnStyle}}"
+      bindtap='toAgree'
+  >{{btnText}}</button>

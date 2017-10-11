@@ -9,6 +9,7 @@
           class="zan-form__input zan-cell__bd"
           placeholder="手机号"
           style="margin-left: 100rpx"
+          bindinput="phoneInput"
         />
       </view>
       <view class="zan-form__item login_cell">
@@ -19,6 +20,7 @@
           maxlength="20"
           placeholder="密码"
           style="margin-left: 100rpx"
+          bindinput="pswInput"
         />
       </view>
     </view>

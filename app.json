@@ -7,7 +7,8 @@
     "pages/identifyResult/identifyResult",
     "pages/orderCar/orderCar",
     "pages/orderSuccess/orderSuccess",
-    "pages/rate/rate"
+    "pages/rate/rate",
+    "pages/agreement/agreement"
   ],
   "window": {
     "backgroundTextStyle": "light",

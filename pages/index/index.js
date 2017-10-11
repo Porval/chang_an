@@ -1,14 +1,35 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var service = require('../../utils/service');
 
 Page({
   data: {
     hasLoggedIn: false,
+    userPhone: "",
+    userPsw: ""
   },
   toLogin: function() {
-    wx.navigateTo({
-      url: '../identifyResult/identifyResult',
+    this.service({
+      api: '/app/official/login.ashx',
+      query: {
+        username: this.data.userPhone,
+        password: this.data.userPsw
+      },
+      success: (res) => {
+          
+        }
+      });
+    console.log("usePhone " + this.data.userPhone);
+  },
+  phoneInput: function(e) {
+    this.setData({
+      userPhone: e.detail.value
+    })
+  },
+  pswInput: function(e) {
+    this.setData({
+      userPsw: e.detail.value
     })
   },
   //事件处理函数
@@ -23,5 +44,7 @@ Page({
         hasLoggedIn: true
       })
     }
+
+    this.service = service(this);
   }
 })
