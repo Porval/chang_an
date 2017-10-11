@@ -20,16 +20,19 @@
     <view class="zan-cell zan-form__item">
       <input
         class="zan-form__input zan-cell__bd"
+        type="number"
         placeholder="请输入手机号码"
+        bindinput="phoneInput"
       />
     </view>
     <view class="zan-cell zan-cell__no-pading zan-form__item zan-cell--last-child">
       <view class="zan-cell__bd zan-cell__bd_padding">
         <input
           class="zan-form__input"
-          type="text"
+          type="number"
           maxlength="7"
           placeholder="请输入短信验证码"
+          bindinput="smsCodeInput"
         />
       </view>
       <view class="zan-cell__ft">
@@ -49,6 +52,7 @@
         class="zan-form__input zan-cell__bd"
         placeholder="请输入登录密码"
         type="password"
+        bindinput="pswInput"
       />
     </view>
     <view class="zan-cell zan-form__item zan-cell--last-child">
@@ -56,15 +60,18 @@
         class="zan-form__input zan-cell__bd"
         placeholder="请再次输入登录密码"
         type="password"
+        bindinput="confirmPswInput"
       />
     </view>
   </view>
 
-  <view class="zan-panel-title">
-    <checkbox id="@+id/check_agreement"></checkbox>
-    <text>我已阅读并同意</text>
-    <text class="font-highlight">《长安出行用户使用协议》</text>
-  </view>
+  <checkbox-group bindchange="checkboxChange">
+    <view class="zan-panel-title">
+      <checkbox ></checkbox>
+      <text>我已阅读并同意</text>
+      <text class="font-highlight">《长安出行用户使用协议》</text>
+    </view>
+  </checkbox-group>
 
   <button class="zan-btn zan-btn--large button-primary button-page-buttom"
       bindtap='toNext'
