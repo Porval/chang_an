@@ -71,7 +71,6 @@ Page({
   },
 
   checkboxChange: function(e) {
-    console.log(e);
       this.setData({
           isCheckedAgreement: e.detail.value.length > 0 
       });
@@ -84,7 +83,6 @@ Page({
   },
 
   toConnectService: function(e) {
-    console.log(e);
     wx.showModal({
       title: '提示',
       content: '客服电话: 02388256088\n转9，以#号键结束',
