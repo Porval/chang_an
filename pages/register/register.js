@@ -21,6 +21,9 @@ function countdown(that) {
  }, 1000)  
 }  
 
+const app = getApp()
+var service = require('../../utils/service');
+
 Page({
 
   /**
@@ -43,7 +46,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.service = service(this);
   },
 
   phoneInput: function(e) {
@@ -101,7 +104,23 @@ Page({
 
   toSendSmsCode: function() {
     if(this.data.btnStyle == "zan-btn--primary") {
-      countdown(this); 
+      //TODO CHECK PHONE NUMBER
+      this.service({
+        api: '/app/official/forgetsms.ashx',
+        query: {
+          type: 2,
+          mobile: this.data.mobile
+        },
+        success: (res) => {
+            console.log("smsCode send success " + res);
+            countdown(this);
+        },
+        fail: (res)=> {
+            wx.showToast({
+                title: "发送失败请重试"
+            })
+        } 
+      });
     }
   },
 
