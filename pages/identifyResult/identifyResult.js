@@ -83,5 +83,15 @@ Page({
         url: '../orderCar/orderCar'
       })
     }
+  },
+  onClickVreal() {
+    wx.navigateTo({
+      url:'../identity/identity'
+    })
+  },
+  onClickVdriver() {
+    wx.navigateTo({
+      url:'../driverIdentity/driverIdentity'
+    })
   }
 })

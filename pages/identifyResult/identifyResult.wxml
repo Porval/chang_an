@@ -1,10 +1,10 @@
 <view class="container">
   <view class="zan-form" style='magrin-top: 20rpx'>
-      <view class="zan-cell zan-form__item item-form">
+      <view class="zan-cell zan-form__item item-form" bindtap="onClickVreal">
         <text class="zan-form__title">身份认证</text>
         <text class="zan-form_content text-result">{{identifyStatus}}</text>
       </view>
-    <view class="zan-cell zan-form__item item-form">
+    <view class="zan-cell zan-form__item item-form" bindtap="onClickVdriver">
         <text class="zan-form__title item-form">驾照认证</text>
         <text class="zan-form__content text-result">{{driveIndentifyStatus}}</text>
     </view>
