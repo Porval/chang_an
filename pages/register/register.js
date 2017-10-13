@@ -153,7 +153,27 @@ Page({
     }
   },
 
+  getAccessToken() {
+    this.service({
+      api: '/app/official/login.ashx',
+      query: {
+        username: this.data.mobile,
+        password: this.data.psw
+      },
+      success: (res) => {
+          console.log("login success " + res);
+          if(res.access_token) {
+              app.setToken(res.access_token, this.data.userPhone);
+          }
+        }
+    });
+  },
+
   toNext: function () {
+    wx.showLoading({
+        title: "提交中..."
+    });
+    var that = this;
     this.service({
         api: '/app/official/register.ashx',
         query: {
@@ -165,6 +185,7 @@ Page({
           from: 6
         },
         success: (res) => {
+            that.getAccessToken();
             console.log("register success " + res);
         },
         fail: (res)=> {
