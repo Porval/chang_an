@@ -16,6 +16,7 @@ Page({
     carCodeList: [],
     carList: [],
     carIndex: 0,
+    firstLoad: true,
     user: null
   },
 
@@ -193,12 +194,20 @@ Page({
                     carList[index] = res.list[index].modelName;
                     carCodeList[index] = res.list[index].modelId;
                 }
-                this.setData({
+                that.setData({
                     carList: carList,
                     carCodeList: carCodeList,
                     carIndex: 0
                 })
                 wx.hideLoading();
+
+
+                if(that.data.firstLoad) {
+                    that.setData({
+                      firstLoad: false
+                    })
+                    that.checkUnRateOrder();
+                }
             }
         },
         fail: (res)=> {
@@ -250,6 +259,31 @@ Page({
              url: '../orderSuccess/orderSuccess',
           })
           wx.hideLoading();
+        },
+        fail: (res)=> {
+            wx.showToast({
+                title: "获取信息失败"
+            })
+
+            wx.reLaunch({
+              url: "./index/index"
+            })
+        } 
+    });
+  },
+
+  checkUnRateOrder: function() {
+     var that = this;
+     this.service({
+        origin: 'pre',
+        api: '/testdrive/getOrderId.ashx',
+        data: {
+           access_token: app.getAccessToken()
+        },
+        success: (res) => {
+          if(!res.havreview) {
+             that.showToCommentAlert();
+          }
         },
         fail: (res)=> {
             wx.showToast({
