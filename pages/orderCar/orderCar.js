@@ -177,9 +177,9 @@ Page({
             if(res.list) {
                 var carList = [];
                 var carCodeList = [];
-                for(var index in res.list) {
-                    carList.push(res.list[index].modelName);
-                    carCodeList.push(res.list[index].modelId);
+                for(var index in res.list) {                
+                    carList[index] = res.list[index].modelName;
+                    carCodeList[index] = res.list[index].modelId;
                 }
                 this.setData({
                     carList: carList,
@@ -187,7 +187,6 @@ Page({
                     carIndex: 0
                 })
                 wx.hideLoading();
-                onCarChanged(carCodeList[0]);
             }
         },
         fail: (res)=> {
@@ -202,9 +201,10 @@ Page({
     });
   },
 
-  onCarChanged: function(carIndex) {
+  onCarChanged: function(e) {
+    console.log(e.detail.value);
     this.setData({
-        carIndex: carIndex
+        carIndex: e.detail.value
     })
   },
 
