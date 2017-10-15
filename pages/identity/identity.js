@@ -28,9 +28,20 @@ Page({
     this.service = service(this);
     
     if(vData) {
-       this.setData({
-          vStats: vData.vStatus
-       })
+       var btnStyle = '';
+       if(vData.vStats == 1 || vData.vStats == 2) {
+          this.setData({
+            vStats: vData.vStatus,
+            btnStyle: 'btn-disabled',
+            uploadImageOne: vData.urlOne,
+            uploadImageTwo: vData.urlTwo
+          })
+       } else {
+          this.setData({
+            vStats: vData.vStatus,
+            btnStyle: '',
+          })
+       }
     }
   },
 
