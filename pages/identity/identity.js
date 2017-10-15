@@ -30,13 +30,13 @@ Page({
     if(vData) {
        var btnStyle = '';
        console.log(vData.vStatus)
-       if(vData.vStatus == 1 || vData.vStatus == 2) {
+       //TODO 添加已上传图片
+       if(vData != null && (vData.vStatus == 1 || vData.vStatus == 2)) {
+          console.log('vData ' + vData.urlOne + ' ' + vData.urlTwo);
           this.setData({
             vStats: vData.vStatus,
             showSubmitButton: false,
-            btnStyle: 'btn-disabled',
-            uploadImageOne: vData.urlOne,
-            uploadImageTwo: vData.urlTwo
+            btnStyle: 'btn-disabled'
           })
        } else {
           this.setData({

@@ -34,9 +34,7 @@ Page({
           this.setData({
             vStats: vData.vStatus,
             showSubmitButton: false,
-            btnStyle: 'btn-disabled',
-            uploadImageOne: vData.urlOne,
-            uploadImageTwo: vData.urlTwo
+            btnStyle: 'btn-disabled'
           })
        } else {
           this.setData({

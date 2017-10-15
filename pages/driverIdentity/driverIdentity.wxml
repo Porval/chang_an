@@ -1,7 +1,7 @@
 <view class="container">
   <view class="upload-cell" bindtap='onClickAddInditityImageOne'>
       <image class="upload-image-sample" src="{{uploadImageOne}}" mode="scaleToFill"></image>
-      <view class="image-mask">
+      <view class="image-mask" style="display: {{showSubmitButton ? 'flex': 'none'}}">
         <image class="icon-large" src="/drawable/ic_plus.png"></image>
         <text>点击上传驾照正面照片</text>
       </view>
@@ -9,7 +9,7 @@
   
 <view class="upload-cell" style='margin-top: 400rpx' bindtap='onClickAddInditityImageTwo'>
       <image class="upload-image-sample" src="{{uploadImageTwo}}" mode="scaleToFill"></image>
-      <view class="image-mask" style="display: {{showSubmitButton ? 'block': 'none'}}">
+      <view class="image-mask" style="display: {{showSubmitButton ? 'flex': 'none'}}">
         <image class="icon-large" src="/drawable/ic_plus.png"></image>
         <text>点击上传驾照副页照片</text>
       </view>
