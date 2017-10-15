@@ -83,7 +83,7 @@ Page({
   checkVertifyResult() {
     if(this.data.user 
         && this.data.user.vreal == 1
-        && this.data.user.vdrive == 100) {
+        && this.data.user.vdrive == 1) {
       wx.navigateTo({
         url: '../orderCar/orderCar'
       })
