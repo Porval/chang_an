@@ -13,7 +13,7 @@
   
 <view class="upload-cell" style='margin-top: 400rpx' bindtap='onClickAddInditityImageTwo'>
       <image class="upload-image-sample" src="{{uploadImageTwo}}" mode="scaleToFill"></image>
-      <view class="image-mask">
+      <view class="image-mask" style="display: {{showSubmitButton ? 'block': 'none'}}">
         <image class="icon-large" src="/drawable/ic_plus.png"></image>
         <text>点击上传身份证反面照片</text>
       </view>

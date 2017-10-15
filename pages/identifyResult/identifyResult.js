@@ -101,8 +101,10 @@ Page({
     })
   },
   onClickVdriver() {
-    var vData = {
-        vStatus: this.data.user.vdrive
+     var vData = {
+        vStatus: this.data.user.vreal,
+        urlOne: this.data.user.certifyImagePos,
+        urlTwo: this.data.user.certifyImage
     };
     var dbId = app.db.set(vData);
     wx.navigateTo({
