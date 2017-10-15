@@ -1,14 +1,14 @@
 <view class="container">
-  <view class="upload-cell" bindtap='onClickAddInditityImage'>
-      <image class="upload-image-sample" src="{{uploadImage1}}" mode="scaleToFill"></image>
+  <view class="upload-cell" bindtap='onClickAddInditityImageOne'>
+      <image class="upload-image-sample" src="{{uploadImageOne}}" mode="scaleToFill"></image>
       <view class="image-mask">
         <image class="icon-large" src="/drawable/ic_plus.png"></image>
         <text>点击上传身份证正面照片</text>
       </view>
   </view>
   
-<view class="upload-cell" style='margin-top: 400rpx' bindtap='onClickAddInditityImage'>
-      <image class="upload-image-sample" src="/drawable/bg_identity_2.jpeg" mode="scaleToFill"></image>
+<view class="upload-cell" style='margin-top: 400rpx' bindtap='onClickAddInditityImageTwo'>
+      <image class="upload-image-sample" src="{{uploadImageTwo}}" mode="scaleToFill"></image>
       <view class="image-mask">
         <image class="icon-large" src="/drawable/ic_plus.png"></image>
         <text>点击上传身份证反面照片</text>

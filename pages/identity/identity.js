@@ -9,9 +9,10 @@ Page({
    * 页面的初始数据
    */ 
   data: {
-      uploadImage1: '/drawable/bg_identity_1.jpeg',
+      uploadImageOne: '/drawable/bg_identity_1.jpeg',
+      uploadImageTwo: '/drawable/bg_identity_2.jpeg',
       showSubmitButton: true,
-      btnStyle: 'btn-disabled ',
+      btnStyle: 'btn-disabled',
       btnText: '提交申请'
   },
 
@@ -32,7 +33,15 @@ Page({
 
   },
 
-  onClickAddInditityImage: function() {
+  onClickAddInditityImageTwo: function() {
+    this.onClickAddInditityImage(2);
+  },
+
+  onClickAddInditityImageOne: function() {
+    this.onClickAddInditityImage(1)
+  },
+
+  onClickAddInditityImage: function(type) {
     var that = this;
     wx.chooseImage({
       count: 1,
@@ -41,9 +50,28 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
+        console.log('type ' + type)
+        var canSubmit = false;
+        if(type == 1) {
+          that.setData({
+             uploadImageOne: tempFilePaths
+          })
+          if(that.uploadImageTwo && that.uploadImageTwo.indexOf('bg_identity_2') == -1) {
+             canSubmit = true;
+          }
+        } else if (type == 2) {
+          that.setData({
+            uploadImageTwo: tempFilePaths
+          })
+          if(that.data.uploadImageOne && that.data.uploadImageOne.indexOf('bg_identity_1') == -1) {
+             canSubmit = true;
+          }
+        }
+
         that.setData({
-            uploadImage1: tempFilePaths
+            btnStyle : canSubmit ? '' : 'btn-disabled'
         })
+      
         console.log(tempFilePaths);
       }
     })
