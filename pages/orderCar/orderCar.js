@@ -13,7 +13,7 @@ Page({
     shopCodeList: [],
     shopList: [],
     shopIndex: 0,
-    cartCodeList: [],
+    carCodeList: [],
     carList: [],
     carIndex: 0,
     user: null
@@ -43,7 +43,7 @@ Page({
                 var cityCodeList = [];
                 for(var index in res.list) {
                     cityList.push(res.list[index].name);
-                    cityCodeList.push(res.list[index].code);
+                    cityCodeList.push(res.list[index].host);
                 }
                 this.setData({
                     cityList: cityList,
@@ -70,6 +70,7 @@ Page({
     this.setData({
         cityIndex: cityIndex
     });
+    console.log('city index ' + cityIndex);
     this.toCityChanged(this.data.cityCodeList[cityIndex]);
   },
 
@@ -219,9 +220,40 @@ Page({
   },
   
   toOrder: function() {
-    wx.navigateTo({
-      url: '../orderSuccess/orderSuccess',
-    }) 
+    var that = this;
+    wx.showLoading({
+      title: "提交中..."
+    });
+    this.service({
+        origin: 'pre',
+        api: '/testdrive/subApplication.ashx',
+        method: 'POST',
+        data: {
+           sex: this.data.user.sex == 1 ? 'man': 'woman',
+           name: this.data.user.name,
+           mobile: this.data.user.mobile,
+           city: this.data.cityCodeList[this.data.cityIndex],
+           area: this.data.areaCodeList[this.data.areaIndex],
+           storeId: this.data.shopCodeList[this.data.shopIndex],
+           modelId: this.data.carCodeList[this.data.carIndex],
+           access_token: app.getAccessToken()
+        },
+        success: (res) => {
+          wx.navigateTo({
+             url: '../orderSuccess/orderSuccess',
+          })
+          wx.hideLoading();
+        },
+        fail: (res)=> {
+            wx.showToast({
+                title: "获取信息失败"
+            })
+
+            wx.reLaunch({
+              url: "./index/index"
+            })
+        } 
+    });
   },
 
   showToCommentAlert: function() {
