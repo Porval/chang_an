@@ -9,14 +9,27 @@ Page({
    * 页面的初始数据
    */ 
   data: {
-      uploadImage1: '/drawable/bg_identity_1.jpeg'
+      uploadImage1: '/drawable/bg_identity_1.jpeg',
+      showSubmitButton: true,
+      btnStyle: 'btn-disabled ',
+      btnText: '提交申请'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var dbId = options.dbId;
+    var vData = app.db.get(dbId);
+    if(vData) {
+       this.setData({
+          vStats: vData.vStatus
+       })
+    }
+  },
+
+  onShow: function() {
+
   },
 
   onClickAddInditityImage: function() {

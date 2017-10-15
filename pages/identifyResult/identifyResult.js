@@ -104,7 +104,7 @@ Page({
     };
     var dbId = app.db.set(vData);
     wx.navigateTo({
-      url:'../driverIdentity/driverIdentity?dbId=' + dbId;
+      url:'../driverIdentity/driverIdentity?dbId=' + dbId
     })
   }
 })
