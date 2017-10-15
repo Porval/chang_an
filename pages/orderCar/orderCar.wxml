@@ -2,19 +2,20 @@
     <view class="container">
     <image class="page-span" src='/drawable/order_page_span.png'></image>         <view class='order-content'>
       <view>
-        <checkbox>先生</checkbox>
-        <checkbox style='margin-left: 50rpx'>女士</checkbox>
+        <checkbox checked="{{user.sex == 1 ? 'true' : ''}}" disabled='true' >先生</checkbox>
+        <checkbox checked="{{user.sex != 1 ? 'true' : ''}}" disabled='true' style='margin-left: 50rpx'>女士</checkbox>
       </view>                  
        <input
           class="zan-form__input zan-cell__bd item-input"
                     maxlength="20"
-          placeholder="张三"
+          placeholder="{{user.name}}"
+          disabled=true
         /> 
       <view>
       <input
           class="zan-form__input zan-cell__bd item-input"
                     maxlength="20"
-          placeholder="18801105845"
+          placeholder="{{user.mobile}}"
           type='number'
       /> 
       </view>

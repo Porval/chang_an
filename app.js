@@ -13,7 +13,7 @@ App({
   loadUser: function() {
      var user = this.storage.get('app:user');
      if(user) {
-        this.globalData.user = user;
+        this.globalData.user = user.user;
      }
   },
   loadToken: function() {
@@ -52,7 +52,7 @@ App({
     }
   },
   getUser: function() {
-    return this.globalData.user.user;
+    return this.globalData.user;
   },
 
   Wux: Wux, 

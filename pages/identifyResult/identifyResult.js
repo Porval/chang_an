@@ -33,6 +33,7 @@ Page({
             this.setData({
                 user: res.map
             })
+            app.setUser(res.map);
             this.refreshStatus();
             this.checkVertifyResult();
         },

@@ -15,7 +15,8 @@ Page({
     shopIndex: 0,
     cartCodeList: [],
     carList: [],
-    carIndex: 0
+    carIndex: 0,
+    user: null
   },
 
   /**
@@ -23,6 +24,9 @@ Page({
    */
   onLoad: function (options) {
       this.service = service(this);
+      this.setData({
+          user: app.getUser()
+      })
       this.loadCityList();
   },
 
