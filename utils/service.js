@@ -42,7 +42,7 @@ module.exports = function (app) {
 
       var requestOptions = {
         url: url({
-          origin: 'service',
+          origin: options.origin == null ? 'service' : options.origin,
           pathname: options.api,
           query: extend({
             
