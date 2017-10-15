@@ -4,6 +4,7 @@
 const app = getApp()
 var service = require('../../utils/service');
 
+
 Page({
   /**
    * 页面的初始数据
@@ -24,6 +25,8 @@ Page({
   onLoad: function (options) {
     var dbId = options.dbId;
     var vData = app.db.get(dbId);
+    this.service = service(this);
+    
     if(vData) {
        this.setData({
           vStats: vData.vStatus
@@ -122,7 +125,22 @@ Page({
   },
 
   submitIdentify: function() {
-      console.log("url " + this.data.uploadImageOneUrl + '  url2 ' + this.data.uploadImageTwoUrl)
+      this.service({
+        api: '/app/official/authIdentity.ashx',
+        data: {
+          certifyImgPositive: this.data.uploadImageOneUrl,
+          certifyImg: this.data.uploadImageTwoUrl,
+          certifyType: '1',
+          mobile: app.getUserMobile()
+        },
+        method: 'POST',
+        success: (res) => {
+            console.log("post to submitIdentify " + res);
+            if(res.code == 200) {
+                wx.navgateBack();
+            }
+          }
+      });
   },
 
   uploadError: function() {

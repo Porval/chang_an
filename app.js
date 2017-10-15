@@ -40,6 +40,9 @@ App({
   getAccessToken: function() {
     return this.globalData.token.accessToken;
   },
+  getUserMobile: function() {
+    return this.globalData.token.mobile;
+  },
   setUser: function(freshUser) {
     if(freshUser) {
       this.globalData.user = freshUser;
