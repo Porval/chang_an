@@ -29,9 +29,11 @@ Page({
     
     if(vData) {
        var btnStyle = '';
-       if(vData.vStats == 1 || vData.vStats == 2) {
+       console.log(vData.vStatus)
+       if(vData.vStatus == 1 || vData.vStatus == 2) {
           this.setData({
             vStats: vData.vStatus,
+            showSubmitButton: false,
             btnStyle: 'btn-disabled',
             uploadImageOne: vData.urlOne,
             uploadImageTwo: vData.urlTwo
@@ -39,6 +41,7 @@ Page({
        } else {
           this.setData({
             vStats: vData.vStatus,
+            showSubmitButton: true,
             btnStyle: '',
           })
        }
