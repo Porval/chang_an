@@ -122,15 +122,15 @@ Page({
                 var shopList = [];
                 var shopCodeList = [];
                 for(var index in res.list) {
-                    shopList.push(res.list[index].name);
-                    shopCodeList.push(res.list[index].code);
+                    shopList.push(res.list[index].storeName);
+                    shopCodeList.push(res.list[index].storeId);
                 }
                 this.setData({
                     shopList: shopList,
                     shopCodeList: shopCodeList,
                     shopIndex: 0
                 })
-                that.onShopChanged();
+                that.onShopChanged(shopCodeList[0]);
             }
         },
         fail: (res)=> {
@@ -145,8 +145,44 @@ Page({
     });
   },
 
-  onShopChanged: function() {
+  onShopChanged: function(storeId) {
+    var that = this;
+    wx.showLoading({
+      title: "加载中..."
+    });
+    this.service({
+        origin: 'pre',
+        api: '/testdrive/getCtCar.ashx',
+        query: {
+           storeId: storeId
+        },
+        success: (res) => {
+            if(res.list) {
+                var carList = [];
+                var carCodeList = [];
+                for(var index in res.list) {
+                    carList.push(res.list[index].modelName);
+                    carCodeList.push(res.list[index].modelId);
+                }
+                this.setData({
+                    carList: carList,
+                    carCodeList: carCodeList,
+                    carIndex: 0
+                })
+                wx.hideLoading();
+                onCarChanged();
+            }
+        },
+        fail: (res)=> {
+            wx.showToast({
+                title: "获取信息失败"
+            })
 
+            wx.reLaunch({
+              url: "./index/index"
+            })
+        } 
+    });
   },
 
   onCarChanged: function() {
