@@ -46,7 +46,7 @@ Page({
                     cityCodeList: cityCodeList,
                     cityIndex: 0
                 })
-                that.onCityChanged(cityCodeList[0]);
+                that.toCityChanged(cityCodeList[0]);
             }
         },
         fail: (res)=> {
@@ -61,14 +61,15 @@ Page({
     });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-   
+  onCityChanged: function(e) {
+    var cityIndex = e.detail.value;
+    this.setData({
+        cityIndex: cityIndex
+    });
+    this.toCityChanged(this.data.cityCodeList[cityIndex]);
   },
 
-  onCityChanged: function(cityCode) {
+  toCityChanged: function(cityCode) {
     var that = this;
     wx.showLoading({
       title: "加载中..."
@@ -91,7 +92,7 @@ Page({
                     areaCodeList: areaCodeList,
                     areaIndex: 0
                 })
-                that.onAreaChanged(areaCodeList[0]);
+                that.toAreaChanged(areaCodeList[0]);
             }
         },
         fail: (res)=> {
@@ -106,7 +107,15 @@ Page({
     });
   },
 
-  onAreaChanged: function(areaCode) {
+  onAreaChanged: function(e) {
+    var areaIndex = e.detail.value;
+    this.setData({
+        areaIndex: areaIndex
+    });
+    this.toAreaChanged(this.data.areaCodeList[areaIndex]);
+  },
+
+  toAreaChanged: function(areaCode) {
     var that = this;
     wx.showLoading({
       title: "加载中..."
@@ -130,7 +139,7 @@ Page({
                     shopCodeList: shopCodeList,
                     shopIndex: 0
                 })
-                that.onShopChanged(shopCodeList[0]);
+                that.toShopChanged(shopCodeList[0]);
             }
         },
         fail: (res)=> {
@@ -145,7 +154,15 @@ Page({
     });
   },
 
-  onShopChanged: function(storeId) {
+  onShopChanged: function(e) {
+    var shopIndex = e.detail.value;
+    this.setData({
+        shopIndex: shopIndex
+    });
+    this.toShopChanged(this.data.shopList[shopIndex]);
+  },
+
+  toShopChanged: function(storeId) {
     var that = this;
     wx.showLoading({
       title: "加载中..."
@@ -170,7 +187,7 @@ Page({
                     carIndex: 0
                 })
                 wx.hideLoading();
-                onCarChanged();
+                onCarChanged(carCodeList[0]);
             }
         },
         fail: (res)=> {
@@ -185,8 +202,10 @@ Page({
     });
   },
 
-  onCarChanged: function() {
-
+  onCarChanged: function(carIndex) {
+    this.setData({
+        carIndex: carIndex
+    })
   },
 
   onClickAgreement: function() {
