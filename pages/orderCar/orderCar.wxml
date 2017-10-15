@@ -17,6 +17,7 @@
                     maxlength="20"
           placeholder="{{user.mobile}}"
           type='number'
+          bindinput="phoneInput"
       /> 
       </view>
       <view style='margin-top: 20rpx;'>

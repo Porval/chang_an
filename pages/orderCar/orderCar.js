@@ -25,9 +25,16 @@ Page({
   onLoad: function (options) {
       this.service = service(this);
       this.setData({
-          user: app.getUser()
+          user: app.getUser(),
+          orderMobile: app.getUser().mobile
       })
       this.loadCityList();
+  },
+
+  phoneInput: function(e) {
+    this.setData({
+        orderMobile: e.detail.value
+    })
   },
 
   loadCityList: function() {
@@ -231,7 +238,7 @@ Page({
         data: {
            sex: this.data.user.sex == 1 ? 'man': 'woman',
            name: this.data.user.name,
-           mobile: this.data.user.mobile,
+           mobile: this.data.orderMobile,
            city: this.data.cityCodeList[this.data.cityIndex],
            area: this.data.areaCodeList[this.data.areaIndex],
            storeId: this.data.shopCodeList[this.data.shopIndex],
