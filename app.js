@@ -1,10 +1,12 @@
 //app.js
 import Wux from 'components/wux'
 var storage = require('./utils/storage');	
+var db = require('./utils/db');
 
 App({
   onLaunch: function () {
   	 this.storage = storage(this);
+     this.db = db;
   	 this.loadToken();	
      this.loadUser();
   },
@@ -23,8 +25,12 @@ App({
   },
   setToken: function(token, mobile) {
   	if(token) {
+      console.log("setToken " + token);
   		this.globalData.hasToken = true;
-  		this.globalData.token = token;
+  		this.globalData.token = {
+          accessToken: token,
+          mobile: mobile
+      };
   		this.storage.set('app:token', {
             accessToken: token,
             mobile: mobile

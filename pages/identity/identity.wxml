@@ -31,7 +31,7 @@
   </view>
 
   <view class="upload-cell" bindtap='onClickAddInditityImage'>
-      <image class="upload-image-sample" src="/drawable/bg_identity_1.jpeg" mode="scaleToFill"></image>
+      <image class="upload-image-sample" src="{{uploadImage1}}" mode="scaleToFill"></image>
       <view class="image-mask">
         <image class="icon-large" src="/drawable/ic_plus.png"></image>
         <text>点击上传身份证正面照片</text>
