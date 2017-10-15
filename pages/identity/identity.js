@@ -13,7 +13,9 @@ Page({
       uploadImageTwo: '/drawable/bg_identity_2.jpeg',
       showSubmitButton: true,
       btnStyle: 'btn-disabled',
-      btnText: '提交申请'
+      btnText: '提交申请',
+      uploadImageOneUrl: '',
+      uploadImageTwoUrl: ''
   },
 
   /**
@@ -54,7 +56,7 @@ Page({
         var canSubmit = false;
         if(type == 1) {
           that.setData({
-             uploadImageOne: tempFilePaths
+             uploadImageOne: tempFilePaths[0]
           })
           if(that.uploadImageTwo && that.uploadImageTwo.indexOf('bg_identity_2') == -1) {
              canSubmit = true;
@@ -77,41 +79,62 @@ Page({
     })
   },
 
-  uploadImages: function() {
-    console.log(this.data.uploadImage1[0]);
+  uploadImages: function(step) {
+    var that = this;
+    wx.showLoading({
+        title: '正在上传图片...'
+    })
     wx.uploadFile({
       url: "https://static.ccclubs.com/upload/up.do?app=chango",
-      filePath: this.data.uploadImage1[0], 
+      filePath: that.data.uploadImageOne, 
       header: { "Content-Type": "multipart/form-data" },
       name: 'file',
-      formData: {
-          'fileFileName': 'test'
-      },
       success: function (res) {
-        console.log(res);
-        if (res.statusCode != 200) { 
-            wx.showModal({
-              title: '提示',
-              content: '上传失败',
-              showCancel: false
-            })
-            return;
+        if(res.statusCode != 200 || res.data == null) {
+          that.uploadError();
+        } else {
+          var response = JSON.parse(res.data);
+          if(response == null || response.code != 200) {
+            that.uploadError();
+          } else {
+            if(step == 1) {
+               that.setData({
+                  uploadImageOneUrl: response.url
+               }) 
+               that.uploadImages(2);
+            } else {
+               that.setData({
+                  uploadImageTwoUrl: response.url
+               }) 
+               that.submitIdentify();
+            }
+          }
         }
       },
       fail: function (e) {
         console.log(e);
-        wx.showModal({
-          title: '提示',
-          content: '上传失败',
-          showCancel: false
-        })
+        that.uploadError();
       },
       complete: function () {
-        wx.hideToast();  //隐藏Toast
+        wx.hideLoading();  //隐藏Toast
       }
     })
   },
+
+  submitIdentify: function() {
+      console.log("url " + this.data.uploadImageOneUrl + '  url2 ' + this.data.uploadImageTwoUrl)
+  },
+
+  uploadError: function() {
+    wx.showModal({
+        title: '提示',
+        content: '上传失败',
+        showCancel: false
+    })
+    return;
+  },
+
   toNext:function() {
-    this.uploadImages();
+    this.uploadImages(1);
   }
 })
