@@ -1,4 +1,8 @@
 <view class="container">
+  <view style="display: flex; justify-content: space-between">
+    <text style="margin-left: 60rpx; margin-top: 20rpx; font-size: 16px">证件类型</text>
+    <text style="margin-right: 60rpx; margin-top:20rpx; font-size: 16px">身份证</text>
+  </view>
   <view class="upload-cell" bindtap='onClickAddInditityImageOne'>
       <image class="upload-image-sample" src="{{uploadImageOne}}" mode="scaleToFill"></image>
       <view class="image-mask">
