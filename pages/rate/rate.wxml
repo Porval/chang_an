@@ -10,37 +10,37 @@
       <view class="weui-cell">
         <view class="weui-cell__bd">空间</view>
         <view class="weui-cell__ft">
-          <template is="rater" data="{{ ...$wux.rater.star }}"/>
+          <template is="rater" data="{{ ...$wux.rater.rzoom }}"/>
         </view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">动力</view>
         <view class="weui-cell__ft">
-          <template is="rater" data="{{ ...$wux.rater.star }}"/>
+          <template is="rater" data="{{ ...$wux.rater.rpower }}"/>
         </view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">操控</view>
         <view class="weui-cell__ft">
-          <template is="rater" data="{{ ...$wux.rater.star }}"/>
+          <template is="rater" data="{{ ...$wux.rater.roperation }}"/>
         </view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">油耗</view>
         <view class="weui-cell__ft">
-          <template is="rater" data="{{ ...$wux.rater.star }}"/>
+          <template is="rater" data="{{ ...$wux.rater.rconsumption }}"/>
         </view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">舒适性</view>
         <view class="weui-cell__ft">
-          <template is="rater" data="{{ ...$wux.rater.star }}"/>
+          <template is="rater" data="{{ ...$wux.rater.rcomfortation }}"/>
         </view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">外观</view>
         <view class="weui-cell__ft">
-          <template is="rater" data="{{ ...$wux.rater.star }}"/>
+          <template is="rater" data="{{ ...$wux.rater.rappearance }}"/>
         </view>
       </view>
     </view>
@@ -51,9 +51,9 @@
     </view>
     <view class="block-content">
       <view class="weui-cell">
-        <view class="weui-cell__bd">空间</view>
+        <view class="weui-cell__bd">服务态度</view>
         <view class="weui-cell__ft">
-          <template is="rater" data="{{ ...$wux.rater.star }}"/>
+          <template is="rater" data="{{ ...$wux.rater.rservice }}"/>
         </view>
       </view>
     </view>
@@ -62,12 +62,13 @@
           class="zan-form__input zan-cell__bd"
           maxlength="200"
           placeholder="请输入评价"  
+          bindinput='onCommentChanged'
           />
     </view>
     <view style='height: 50px '>
     </view>
   </view>
 </scroll-view>
-<button class="zan-btn zan-btn--large button-primary button-page-buttom"
+<button class="zan-btn zan-btn--large button-primary button-page-buttom {{btnStyle}}"
       bindtap='toSubmit'
   >提交</button>

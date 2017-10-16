@@ -89,7 +89,7 @@ export default {
 		this.updateValue(id, component.page)
 
     	component.show()
-	},
+	},	
 	/**
 	 * 更新stars
 	 */

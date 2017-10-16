@@ -7,65 +7,55 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+     btnStyle: 'btn-disabled',
+     rateIdList: ['rzoom', 'rpower', 'roperation', 'rconsumption', 'rcomfortation', 'rappearance', 'rservice'],
+     commentInput: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     this.$wuxRater = App.Wux().$wuxRater
-    this.$wuxRater.init('star', {
-      value: 0,
-    })
+
+    for(var index in this.data.rateIdList) {
+        this.$wuxRater.init(this.data.rateIdList[index], {
+          value: 0,
+          callback: function(e) {
+            that.checkAllReady();
+          }
+        })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  checkAllReady() {
+    var canSubmit = this.data.commentInput && this.data.commentInput.length > 0;
+    if(canSubmit) {
+      for(var index in this.data.rateIdList) {
+         var value = this.data.$wux.rater[this.data.rateIdList[index]].value;
+         if(value <= 0) {
+            canSubmit = false;
+            break;
+         }
+      }
+    }
+
+    this.setData({
+      btnStyle: canSubmit ? '' : 'btn-disabled'
+    });
+
+    console.log("checkAllReady");
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+  onCommentChanged(e) {
+     var commentInput = e.detail.value;
+     this.setData({
+         commentInput: commentInput
+     });
+     
+     if(commentInput && commentInput.length > 0) {
+        this.checkAllReady();
+     }
+  } 
 })
