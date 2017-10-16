@@ -43,7 +43,15 @@ Page({
           access_token: app.getAccessToken()
         },
         success: (res) => {
-            
+            if(res && res.ads) {
+              var adsList = [];
+              for(var index in res.ads) {
+                adsList.push(res.ads[index].image);
+              }
+               that.setData({
+                  adList: adsList
+               })
+            }
         }
     });   
   },
