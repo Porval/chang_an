@@ -42,7 +42,6 @@ Page({
           this.setData({
             vStats: vData.vStatus,
             showSubmitButton: true,
-            btnStyle: '',
           })
        }
     }
@@ -107,6 +106,7 @@ Page({
       header: { "Content-Type": "multipart/form-data" },
       name: 'file',
       success: function (res) {
+        console.log("uploadImages " + res.data);
         if(res.statusCode != 200 || res.data == null) {
           that.uploadError();
         } else {
