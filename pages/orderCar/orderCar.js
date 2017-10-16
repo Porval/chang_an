@@ -17,7 +17,8 @@ Page({
     carList: [],
     carIndex: 0,
     firstLoad: true,
-    user: null
+    user: null,
+    adList: ['/drawable/order_page_span.png']
   },
 
   /**
@@ -30,6 +31,21 @@ Page({
           orderMobile: app.getUser().mobile
       })
       this.loadCityList();
+      this.loadAds();
+  },
+
+  loadAds: function() {
+    var that = this;
+    this.service({
+        api: '/testdrive/index.ashx',
+        origin: 'pre',
+        query: {
+          access_token: app.getAccessToken()
+        },
+        success: (res) => {
+            
+        }
+    });   
   },
 
   phoneInput: function(e) {

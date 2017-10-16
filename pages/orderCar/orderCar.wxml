@@ -1,6 +1,14 @@
 <scroll-view>
     <view class="container">
-    <image class="page-span" src='/drawable/order_page_span.png'></image>         <view class='order-content'>
+    <swiper class="page-span"
+        autoplay="true" interval="500">
+        <block wx:for="{{adList}}">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" width="100%" height="100%"/>
+          </swiper-item>
+        </block>
+    </swiper>     
+    <view class='order-content'>
       <view>
         <checkbox checked="{{user.sex == 1 ? 'true' : ''}}" disabled='true' >先生</checkbox>
         <checkbox checked="{{user.sex != 1 ? 'true' : ''}}" disabled='true' style='margin-left: 50rpx'>女士</checkbox>
