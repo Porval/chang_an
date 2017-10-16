@@ -11,8 +11,10 @@
     "pages/agreement/agreement"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgnavigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "white"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": " ",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#f9f9f9"
   }
 }
