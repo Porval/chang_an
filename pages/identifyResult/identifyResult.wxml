@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="zan-form" style='magrin-top: 20rpx'>
+  <view class="zan-form" style='margin-top: 30rpx'>
       <view class="zan-cell zan-form__item item-form" bindtap="onClickVreal">
         <text class="zan-form__title">身份认证</text>
         <text class="zan-form_content text-result">{{identifyStatus}}</text>
