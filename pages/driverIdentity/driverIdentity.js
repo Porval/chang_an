@@ -68,7 +68,7 @@ Page({
   onIdentityEndDateChanged: function(e) {
     this.setData({
         driverIdentityEndDate: e.detail.value
-    ]})
+    })
     this.checkCansubmit();
   },
 
