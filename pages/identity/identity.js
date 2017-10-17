@@ -16,7 +16,11 @@ Page({
       btnStyle: 'btn-disabled',
       btnText: '提交申请',
       uploadImageOneUrl: '',
-      uploadImageTwoUrl: ''
+      uploadImageTwoUrl: '',
+      accountName: null,
+      identityNumber: null,
+      gerenal: ['男', '女'],
+      gerenalIndex: 0
   },
 
   /**
@@ -47,8 +51,22 @@ Page({
     }
   },
 
-  onShow: function() {
+  onGerenalChange: function(e) {
+     this.setData({
+        gerenalIndex: e.detail.value
+     })
+  },
 
+  inputIdentifyNumber: function(e) {
+      this.setData({
+        identityNumber: e.detail.value
+      })
+  },
+
+  inputName: function(e) {
+    this.setData({
+        accountName: e.detail.value
+    })
   },
 
   onClickAddInditityImageTwo: function() {

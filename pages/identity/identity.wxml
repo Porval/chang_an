@@ -1,8 +1,38 @@
 <view class="container">
-  <view style="display: flex; justify-content: space-between">
-    <text style="margin-left: 60rpx; margin-top: 20rpx; font-size: 16px">证件类型</text>
-    <text style="margin-right: 60rpx; margin-top:20rpx; font-size: 16px">身份证</text>
+  <view class="zan-form" style="margin-top: 30rpx">
+    <view class="zan-cell zan-form__item">
+      <text class="zan-form__title">姓名</text>
+      <input
+        class="zan-form__input zan-cell__bd"
+        placeholder="请输入姓名"
+        bindinput="inputName"
+      />
+    </view>
+    <view class="zan-cell zan-form__item">
+      <text class="zan-form__title">性别</text>
+      <view class="zan-form__input zan-cell__bd">
+        <picker
+          mode="selector"
+          range="{{ gerenal }}"
+          value="{{ gerenalIndex }}"
+          bindchange="onGerenalChange"
+        >
+          {{ gerenal[gerenalIndex] }}
+        </picker>
+      </view>
+    </view>
+
+    <view class="zan-cell zan-form__item">
+      <text class="zan-form__title">身份证号</text>
+      <input
+        class="zan-form__input zan-cell__bd"
+        maxlength="20"
+        placeholder="请输入证件号码"
+        bindinput="inputIdentifyNumber"
+      />
+    </view>
   </view>
+
   <view class="upload-cell" bindtap='onClickAddInditityImageOne'>
       <image class="upload-image-sample" src="{{uploadImageOne}}" mode="scaleToFill"></image>
       <view class="image-mask" style="display: {{showSubmitButton ? 'flex': 'none'}}">
