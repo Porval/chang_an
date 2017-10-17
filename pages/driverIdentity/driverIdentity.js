@@ -16,7 +16,12 @@ Page({
       btnStyle: 'btn-disabled',
       btnText: '提交申请',
       uploadImageOneUrl: '',
-      uploadImageTwoUrl: ''
+      uploadImageTwoUrl: '',
+      driverIdentityNumber: null,
+      carTypeIndex:0,
+      carTypeList: ['驾照A', '驾照B'],
+      driverIdentityStartDate: '',
+      driverIdentityEndDate: ''
   },
 
   /**
@@ -46,8 +51,31 @@ Page({
     }
   },
 
-  onShow: function() {
+  inputDriverIdentityNumber: function(e) {
+     this.setData({
+         driverIdentityNumber: e.detail.value
+     })
+     this.checkCansubmit();
+  },
 
+  onIdentityStartDateChanged: function(e) {
+    this.setData({
+        driverIdentityStartDate: e.detail.value
+    })
+    this.checkCansubmit();
+  },
+
+  onIdentityEndDateChanged: function(e) {
+    this.setData({
+        driverIdentityEndDate: e.detail.value
+    ]})
+    this.checkCansubmit();
+  },
+
+  onCarTypeChange: function(e) {
+    this.setData({
+        carTypeIndex: e.detail.value
+    })
   },
 
   onClickAddInditityImageTwo: function() {
@@ -67,31 +95,54 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
-        console.log('type ' + type)
-        var canSubmit = false;
         if(type == 1) {
           that.setData({
              uploadImageOne: tempFilePaths[0]
           })
-          if(that.uploadImageTwo && that.uploadImageTwo.indexOf('bg_drivder_identity_2') == -1) {
-             canSubmit = true;
-          }
         } else if (type == 2) {
           that.setData({
-            uploadImageTwo: tempFilePaths
+            uploadImageTwo: tempFilePaths[0]
           })
-          if(that.data.uploadImageOne && that.data.uploadImageOne.indexOf('bg_drivder_identity_1') == -1) {
-             canSubmit = true;
-          }
         }
 
-        that.setData({
-            btnStyle : canSubmit ? '' : 'btn-disabled'
-        })
-      
-        console.log(tempFilePaths);
+        that.checkCansubmit();
       }
     })
+  },
+
+  checkCansubmit:function() {
+      if(this.data.driverIdentityNumber == null || this.data.driverIdentityNumber.length <= 0) {
+          this.setCanSubmit(false);
+          return;
+      }
+
+      if(this.data.driverIdentityStartDate == null || this.data.driverIdentityStartDate.length <= 0) {
+          this.setCanSubmit(false);
+          return;
+      }
+
+      if(this.data.driverIdentityEndDate == null || this.data.driverIdentityEndDate.length <= 0) {
+          this.setCanSubmit(false);
+          return;
+      }
+
+      if (!(this.data.uploadImageOne && this.data.uploadImageOne.indexOf('bg_drivder_identity_1') == -1)) {
+          this.setCanSubmit(false);
+          return;
+      }
+
+      if(!(this.data.uploadImageTwo && this.data.uploadImageTwo.indexOf('bg_drivder_identity_2') == -1)) {
+          this.setCanSubmit(false);
+          return;
+      }
+
+      this.setCanSubmit(true);
+  },
+
+  setCanSubmit: function(canSubmit) {
+      this.setData({
+          btnStyle : canSubmit ? '' : 'btn-disabled'
+      })
   },
 
   uploadImages: function(step) {

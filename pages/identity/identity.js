@@ -176,6 +176,9 @@ Page({
           aRealName: this.data.accountName,
           aSex: this.data.gerenalIndex == 0  ? '1' : '0',
           aCertifyNum: this.data.identityNumber,
+          sex:  this.data.gerenalIndex == 0  ? '1' : '0',
+          realName: this.data.accountName,
+          certifyNum: this.data.certifyNum,
           certifyImgPositive: this.data.uploadImageOneUrl,
           certifyImg: this.data.uploadImageTwoUrl,
           certifyType: '1',
@@ -183,7 +186,7 @@ Page({
         },
         method: 'POST',
         success: (res) => {
-            console.log("post to submitIdentify " + res);
+            console.log("post to submitIdentify " + JSON.parse(res));
             if(res.code == 200) {
                 wx.navgateBack();
             }

@@ -1,4 +1,46 @@
 <view class="container">
+  <view class="zan-form" style="margin-top: 30rpx">
+    <view class="zan-cell zan-form__item">
+      <text class="zan-form__title">证号</text>
+      <input
+        class="zan-form__input zan-cell__bd"
+        placeholder="请输入驾驶证号"
+        bindinput="inputDriverIdentityNumber"
+      />
+    </view>
+    <view class="zan-cell zan-form__item">
+      <text class="zan-form__title">准驾车型</text>
+      <view class="zan-form__input zan-cell__bd">
+        <picker
+          mode="selector"
+          range="{{ carTypeList }}"
+          value="{{ carTypeIndex }}"
+          bindchange="onCarTypeChange"
+        >
+          {{ carTypeList[carTypeIndex] }}
+        </picker>
+      </view>
+    </view>
+    <view class="zan-cell zan-form__item">
+      <text class="zan-form__title">生效日期</text>
+      <input
+        class="zan-form__input zan-cell__bd"
+        maxlength="20"
+        placeholder="例如：20120902"
+        bindinput="onIdentityStartDateChanged"
+      />
+    </view>
+    <view class="zan-cell zan-form__item">
+      <text class="zan-form__title">截止日期</text>
+      <input
+        class="zan-form__input zan-cell__bd"
+        maxlength="20"
+        placeholder="例如：20170902"
+        bindinput="onIdentityEndDateChanged"
+      />
+    </view>
+  </view>
+
   <view class="upload-cell" bindtap='onClickAddInditityImageOne'>
       <image class="upload-image-sample" src="{{uploadImageOne}}" mode="scaleToFill"></image>
       <view class="image-mask" style="display: {{showSubmitButton ? 'flex': 'none'}}">
