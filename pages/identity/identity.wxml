@@ -6,6 +6,8 @@
         class="zan-form__input zan-cell__bd"
         placeholder="请输入姓名"
         bindinput="inputName"
+        disabled="{{!canEdit}}"
+        value="{{accountName}}"
       />
     </view>
     <view class="zan-cell zan-form__item">
@@ -16,6 +18,7 @@
           range="{{ gerenal }}"
           value="{{ gerenalIndex }}"
           bindchange="onGerenalChange"
+          disabled="{{!canEdit}}"
         >
           {{ gerenal[gerenalIndex] }}
         </picker>
@@ -29,6 +32,8 @@
         maxlength="20"
         placeholder="请输入证件号码"
         bindinput="inputIdentifyNumber"
+        value="{{identityNumber}}"
+        disabled="{{!canEdit}}"
       />
     </view>
   </view>
@@ -49,7 +54,7 @@
       </view>
   </view>
 
-  <view style="display: {{showSubmitButton ? 'flex': 'none'}}; flex-direction: column; align-items: center" class="button-page-buttom">
+  <view style="display: {{canEdit ? 'flex': 'none'}}; flex-direction: column; align-items: center" class="button-page-buttom">
     <text style="color: #999999; font-size: 14px">您的个人信息仅用于验证</text>
     <button class="zan-btn zan-btn--large button-primary {{btnStyle}}" style='margin-top: 10px'
         bindtap='toNext'

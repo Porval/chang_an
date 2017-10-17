@@ -12,7 +12,7 @@ Page({
   data: {
       uploadImageOne: '/drawable/bg_identity_1.jpeg',
       uploadImageTwo: '/drawable/bg_identity_2.jpeg',
-      showSubmitButton: true,
+      canEdit: true,
       btnStyle: 'btn-disabled',
       btnText: '提交申请',
       uploadImageOneUrl: '',
@@ -33,19 +33,24 @@ Page({
     
     if(vData) {
        var btnStyle = '';
-       console.log(vData.vStatus)
+       console.log(vData)
        //TODO 添加已上传图片
        if(vData != null && (vData.vStatus == 1 || vData.vStatus == 2)) {
           console.log('vData ' + vData.urlOne + ' ' + vData.urlTwo);
           this.setData({
             vStats: vData.vStatus,
-            showSubmitButton: false,
-            btnStyle: 'btn-disabled'
+            canEdit: false,
+            btnStyle: 'btn-disabled',
+            uploadImageOne: vData.urlOne,
+            uploadImageTwo: vData.urlTwo,
+            accountName: vData.accountName,
+            identityNumber: vData.certifyNum,
+            gerenalIndex: vData.sex == 1 ? 0 : 1
           })
        } else {
           this.setData({
             vStats: vData.vStatus,
-            showSubmitButton: true,
+            canEdit: true,
           })
        }
     }
@@ -79,27 +84,29 @@ Page({
   },
 
   onClickAddInditityImage: function(type) {
-    var that = this;
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths
-        if(type == 1) {
-          that.setData({
-             uploadImageOne: tempFilePaths[0]
-          })
-        } else if (type == 2) {
-          that.setData({
-            uploadImageTwo: tempFilePaths[0]
-          })
-        }
+    if(this.data.canEdit) {
+      var that = this;
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          var tempFilePaths = res.tempFilePaths
+          if(type == 1) {
+            that.setData({
+               uploadImageOne: tempFilePaths[0]
+            })
+          } else if (type == 2) {
+            that.setData({
+              uploadImageTwo: tempFilePaths[0]
+            })
+          }
 
-        that.checkCanSubmbit();
-      }
-    })
+          that.checkCanSubmbit();
+        }
+      })
+    }
   },
 
   checkCanSubmbit: function() {

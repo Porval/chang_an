@@ -93,8 +93,11 @@ Page({
   onClickVreal() {
     var vData = {
         vStatus: this.data.user.vreal,
-        urlOne: this.data.user.certifyImagePos,
-        urlTwo: this.data.user.certifyImage
+        urlOne: this.data.user.certifyImgPositive,
+        urlTwo: this.data.user.certifyImage,
+        accountName: this.data.user.name,
+        sex: this.data.user.sex,
+        certifyNum: this.data.user.certifyNum
     };
     var dbId = app.db.set(vData);
     wx.navigateTo({
@@ -103,8 +106,8 @@ Page({
   },
   onClickVdriver() {
      var vData = {
-        vStatus: this.data.user.vreal,
-        urlOne: this.data.user.certifyImagePos,
+        vStatus: this.data.user.vdrive,
+        urlOne: this.data.user.certifyImgPositive,
         urlTwo: this.data.user.certifyImage
     };
     var dbId = app.db.set(vData);
