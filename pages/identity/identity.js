@@ -67,6 +67,7 @@ Page({
     this.setData({
         accountName: e.detail.value
     })
+    this.checkCanSubmbit();
   },
 
   onClickAddInditityImageTwo: function() {
@@ -86,32 +87,44 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
-        console.log('type ' + type)
-        var canSubmit = false;
         if(type == 1) {
           that.setData({
              uploadImageOne: tempFilePaths[0]
           })
-          if(that.uploadImageTwo && that.uploadImageTwo.indexOf('bg_identity_2') == -1) {
-             canSubmit = true;
-          }
         } else if (type == 2) {
           that.setData({
-            uploadImageTwo: tempFilePaths
+            uploadImageTwo: tempFilePaths[0]
           })
-          if(that.data.uploadImageOne && that.data.uploadImageOne.indexOf('bg_identity_1') == -1) {
-             canSubmit = true;
-          }
         }
 
-        that.setData({
-            btnStyle : canSubmit ? '' : 'btn-disabled'
-        })
-      
-        console.log(tempFilePaths);
+        that.checkCanSubmbit();
       }
     })
   },
+
+  checkCanSubmbit: function() {
+    var canSubmit = true;
+
+    if(this.data.identityNumber == null || this.data.identityNumber.length <= 0) {
+        canSubmit = false;
+    }
+
+    if(this.data.accountName == null || this.data.accountName.length <= 0) {
+        canSubmit = false;
+    }
+
+    if (!(this.data.uploadImageOne && this.data.uploadImageOne.indexOf('bg_identity_1') == -1)) {
+        canSubmit = false
+    }
+
+    if(!(this.data.uploadImageTwo && this.data.uploadImageTwo.indexOf('bg_identity_2') == -1)) {
+        canSubmit = false;
+    }
+
+    this.setData({
+        btnStyle : canSubmit ? '' : 'btn-disabled'
+    })  
+  }, 
 
   uploadImages: function(step) {
     var that = this;
@@ -160,6 +173,9 @@ Page({
       this.service({
         api: '/app/official/authIdentity.ashx',
         data: {
+          aRealName: this.data.accountName,
+          aSex: this.data.gerenalIndex == 0  ? '1' : '0',
+          aCertifyNum: this.data.identityNumber,
           certifyImgPositive: this.data.uploadImageOneUrl,
           certifyImg: this.data.uploadImageTwoUrl,
           certifyType: '1',
