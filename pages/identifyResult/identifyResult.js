@@ -105,6 +105,13 @@ Page({
     })
   },
   onClickVdriver() {
+    if(this.data.vreal == 0) {
+        wx.showToast({
+            title: '请先进行身份认证'
+        })
+        return;
+    }
+
      var vData = {
         vStatus: this.data.user.vdrive,
         urlOne: this.data.user.driverImage,
