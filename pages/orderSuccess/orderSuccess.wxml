@@ -1,4 +1,4 @@
 <view class="container" style="display: flex; flex-direction: column; align-items:center">
-  <image src='/drawable/ic_plus.png' style="width: 80px;height:80px; margin-top:80px"></image>
+  <text style="margin-top: 100rpx; font-size: 100rpx; color:rgba(255, 102, 0, 0.768627450980392)"></text>
   <text style="text-align:center">您已成功预约试驾体验</text>
 </view>
