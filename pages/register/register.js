@@ -185,8 +185,10 @@ Page({
           from: 6
         },
         success: (res) => {
-            that.getAccessToken();
-            console.log("register success " + res);
+            app.setToken(res.data.token);
+            wx.redirectTo({
+                url: '../identity/identity?from=register'
+            })
         },
         fail: (res)=> {
             wx.showToast({

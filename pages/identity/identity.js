@@ -14,13 +14,14 @@ Page({
       uploadImageTwo: '/drawable/bg_identity_2.jpeg',
       canEdit: true,
       btnStyle: 'btn-disabled',
-      btnText: '提交申请',
+      btnText: '提交审核',
       uploadImageOneUrl: '',
       uploadImageTwoUrl: '',
       accountName: null,
       identityNumber: null,
       gerenal: ['男', '女'],
-      gerenalIndex: 0
+      gerenalIndex: 0,
+      from: ''
   },
 
   /**
@@ -29,6 +30,7 @@ Page({
   onLoad: function (options) {
     var dbId = options.dbId;
     var vData = app.db.get(dbId);
+    var from = options.from;
     this.service = service(this);
     
     if(vData) {
@@ -53,6 +55,14 @@ Page({
           })
        }
     }
+
+    if(from == 'register') {
+        this.setData({
+            btnText: '下一步',
+            from: from
+        })
+    }
+
   },
 
   onGerenalChange: function(e) {
@@ -176,6 +186,7 @@ Page({
   },
 
   submitIdentify: function() {
+      var that = this;
       this.service({
         api: '/app/official/authIdentity.ashx',
         data: {
@@ -194,7 +205,13 @@ Page({
         success: (res) => {
             console.log("post to submitIdentify " + JSON.parse(res));
             if(res.code == 200) {
-                wx.navgateBack();
+                if(that.data.from == 'register') {
+                   wx.redirectTo({
+                      url: '../driverIdentity/driverIdentity?from=register&name=' + that.data.accountName
+                   })
+                } else {
+                   wx.navgateBack();
+                }
             }
           }
       });

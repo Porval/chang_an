@@ -14,12 +14,14 @@ Page({
       uploadImageTwo: '/drawable/bg_drivder_identity_2.jpeg',
       canSubmit: true,
       btnStyle: 'btn-disabled',
-      btnText: '提交申请',
+      btnText: '提交审核',
       driverIdentityNumber: null,
       carTypeIndex:0,
       carTypeList: ['C1', 'C2', 'B2', 'B1', 'A3', 'A2', 'A1'],
       driverIdentityStartDate: '',
-      driverIdentityEndDate: ''
+      driverIdentityEndDate: '',
+      from: '',
+      accountName: ''
   },
 
   /**
@@ -27,6 +29,8 @@ Page({
    */
   onLoad: function (options) {
     var dbId = options.dbId;
+    var from = options.from;
+    var accountName = options.name;
     var vData = app.db.get(dbId);
     this.service = service(this);
       
@@ -50,7 +54,8 @@ Page({
             driverIdentityEndDate: vData.driverEndDate,
             carTypeIndex: carTypeIndex,
             canSubmit: vData.vStatus == 3,
-            btnStyle: 'btn-disabled'
+            btnStyle: 'btn-disabled',
+            accountName: app.getUser().name
           })
           this.checkCansubmit();
        } else {
@@ -58,9 +63,19 @@ Page({
             vStats: vData.vStatus,
             canSubmit: true,
             btnStyle: '',
+            accountName: app.getUser().name
           })
        }
     }
+
+    if(from == 'register') {
+       this.setData({
+          from: from,
+          accountName: accountName,
+
+       })
+    }
+
   },
 
   inputDriverIdentityNumber: function(e) {
@@ -202,6 +217,7 @@ Page({
   },
 
   submitIdentify: function() {
+      var that = this;
       this.service({
         api: '/app/official/authDriver.ashx',
         data: {
@@ -216,14 +232,20 @@ Page({
           driverEndDate: this.data.driverIdentityEndDate,
           aDriverType: this.data.carTypeList[this.data.carTypeIndex],
           mobile: app.getUserMobile(),
-          driverName: app.getUser().name,
-          aDriverName: app.getUser().name
+          driverName: this.data.accountName,
+          aDriverName: this.data.accountName
         },
         method: 'POST',
         success: (res) => {
             console.log("post to submitIdentify " + res);
             if(res.code == 200) {
-                wx.navgateBack();
+                if(that.data.from == 'register') {
+                   wx.redirectTo({
+                      url: '../identifyResult/identifyResult'
+                   })
+                } else {
+                   wx.navgateBack();
+                }
             }
           }
       });
