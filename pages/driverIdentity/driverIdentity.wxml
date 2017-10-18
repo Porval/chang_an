@@ -57,7 +57,7 @@
         </view>
     </view>
     
-    <view class="upload-cell" style='margin-top: 20rpx' bindtap='onClickAddInditityImageTwo'>
+    <view class="upload-cell" bindtap='onClickAddInditityImageTwo'>
         <image class="upload-image-sample" src="{{uploadImageTwo}}" mode="scaleToFill"></image>
         <view class="image-mask" style="display: {{canSubmit ? 'flex': 'none'}}">
           <image class="icon-large" src="/drawable/ic_plus.png"></image>

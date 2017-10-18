@@ -45,7 +45,7 @@
 
 .upload-cell {
   margin: 60rpx;
-  height: 280rpx;
+  height: 270rpx;
   position: relative;
 }
 
