@@ -1,5 +1,6 @@
 // pages/rate/rate.js
 const App = getApp()
+var service = require('../../utils/service');
 
 Page({
 
@@ -9,16 +10,23 @@ Page({
   data: {
      btnStyle: 'btn-disabled',
      rateIdList: ['rzoom', 'rpower', 'roperation', 'rconsumption', 'rcomfortation', 'rappearance', 'rservice'],
-     commentInput: null
+     commentInput: null,
+     orderId: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var orderId = options.orderId;
     var that = this;
-    this.$wuxRater = App.Wux().$wuxRater
+    this.service = service(this);
 
+    this.setData({
+        orderId: orderId
+    })
+
+    this.$wuxRater = App.Wux().$wuxRater
     for(var index in this.data.rateIdList) {
         this.$wuxRater.init(this.data.rateIdList[index], {
           value: 0,
@@ -29,7 +37,7 @@ Page({
     }
   },
 
-  checkAllReady() {
+  checkAllReady: function() {
     var canSubmit = this.data.commentInput && this.data.commentInput.length > 0;
     if(canSubmit) {
       for(var index in this.data.rateIdList) {
@@ -48,7 +56,7 @@ Page({
     console.log("checkAllReady");
   },
 
-  onCommentChanged(e) {
+  onCommentChanged: function(e) {
      var commentInput = e.detail.value;
      this.setData({
          commentInput: commentInput
@@ -57,5 +65,39 @@ Page({
      if(commentInput && commentInput.length > 0) {
         this.checkAllReady();
      }
-  } 
+  },
+
+  toSubmit:function() {
+    wx.showLoading('提交中...');
+    var level = [];
+    for(var index in this.data.rateIdList) {
+        var value = this.data.$wux.rater[this.data.rateIdList[index]].value;
+        level[index] = value;
+    }
+
+    this.service({
+        origin: 'pre',
+        api: '/testdrive/submitReviews.ashx',
+        method: 'POST',
+        data: {
+           orderId: this.data.orderId,
+           level: level,
+           content: this.data.commentInput,
+           access_token: App.getAccessToken()
+        },
+        success: (res) => {
+          wx.hideLoading();
+          wx.navigateBack();
+          wx.showToast({
+              title: "提交成功"
+          })
+        },
+        fail: (res)=> {
+            wx.hideLoading();
+            wx.showToast({
+                title: "提交失败请重新提交"
+            })
+        }
+    });  
+  }
 })

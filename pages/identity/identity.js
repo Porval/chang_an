@@ -34,12 +34,10 @@ Page({
     if(vData) {
        var btnStyle = '';
        console.log(vData)
-       //TODO 添加已上传图片
-       if(vData != null && (vData.vStatus == 1 || vData.vStatus == 2)) {
-          console.log('vData ' + vData.urlOne + ' ' + vData.urlTwo);
+       if(vData != null && (vData.vStatus == 1 || vData.vStatus == 2 || vData.vStatus == 3)) {
           this.setData({
             vStats: vData.vStatus,
-            canEdit: false,
+            canEdit: vData.vStatus == 3,
             btnStyle: 'btn-disabled',
             uploadImageOne: vData.urlOne,
             uploadImageTwo: vData.urlTwo,
@@ -47,6 +45,7 @@ Page({
             identityNumber: vData.certifyNum,
             gerenalIndex: vData.sex == 1 ? 0 : 1
           })
+          this.checkCanSubmbit();
        } else {
           this.setData({
             vStats: vData.vStatus,
@@ -154,12 +153,12 @@ Page({
           } else {
             if(step == 1) {
                that.setData({
-                  uploadImageOneUrl: response.url
+                  uploadImageOne: response.url
                }) 
                that.uploadImages(2);
             } else {
                that.setData({
-                  uploadImageTwoUrl: response.url
+                  uploadImageTwo: response.url
                }) 
                that.submitIdentify();
             }
@@ -186,8 +185,8 @@ Page({
           sex:  this.data.gerenalIndex == 0  ? '1' : '0',
           realName: this.data.accountName,
           certifyNum: this.data.certifyNum,
-          certifyImgPositive: this.data.uploadImageOneUrl,
-          certifyImg: this.data.uploadImageTwoUrl,
+          certifyImgPositive: this.data.uploadImageOne,
+          certifyImg: this.data.uploadImageTwo,
           certifyType: '1',
           mobile: app.getUserMobile()
         },

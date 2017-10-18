@@ -306,7 +306,7 @@ Page({
         },
         success: (res) => {
           if(!res.havreview) {
-             that.showToCommentAlert();
+             that.showToCommentAlert(res.list[0].orderIds);
           }
         },
         fail: (res)=> {
@@ -321,7 +321,7 @@ Page({
     });
   },
 
-  showToCommentAlert: function() {
+  showToCommentAlert: function(orderId) {
     wx.showModal({
       title: '您有试驾订单未评价',
       cancelText: '取消',
@@ -330,7 +330,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.navigateTo({
-            url: '../rate/rate',
+            url: '../rate/rate?orderId=' + orderId,
           })
         }
       }

@@ -12,14 +12,12 @@ Page({
   data: {
       uploadImageOne: '/drawable/bg_drivder_identity_1.jpeg',
       uploadImageTwo: '/drawable/bg_drivder_identity_2.jpeg',
-      showSubmitButton: true,
+      canSubmit: true,
       btnStyle: 'btn-disabled',
       btnText: '提交申请',
-      uploadImageOneUrl: '',
-      uploadImageTwoUrl: '',
       driverIdentityNumber: null,
       carTypeIndex:0,
-      carTypeList: ['驾照A', '驾照B'],
+      carTypeList: ['C1', 'C2', 'B2', 'B1', 'A3', 'A2', 'A1'],
       driverIdentityStartDate: '',
       driverIdentityEndDate: ''
   },
@@ -31,20 +29,34 @@ Page({
     var dbId = options.dbId;
     var vData = app.db.get(dbId);
     this.service = service(this);
-    
+      
     if(vData) {
        var btnStyle = '';
-       console.log(vData.vStatus)
-       if(vData.vStatus == 1 || vData.vStatus == 2) {
+       console.log(vData)
+       var carTypeIndex = 0;
+       for(var index in this.data.carTypeList) {
+          if(vData.driverType == this.data.carTypeList[index]) {
+              carTypeIndex = index;
+          }
+       }
+
+       if(vData.vStatus == 1 || vData.vStatus == 2 || vData.vStatus == 3) {
           this.setData({
             vStats: vData.vStatus,
-            showSubmitButton: false,
+            uploadImageOne: vData.urlOne,
+            uploadImageTwo: vData.urlTwo,
+            driverIdentityNumber: vData.driverNum,
+            driverIdentityStartDate: vData.driverStartDate,
+            driverIdentityEndDate: vData.driverEndDate,
+            carTypeIndex: carTypeIndex,
+            canSubmit: vData.vStatus == 3,
             btnStyle: 'btn-disabled'
           })
+          this.checkCansubmit();
        } else {
           this.setData({
             vStats: vData.vStatus,
-            showSubmitButton: true,
+            canSubmit: true,
             btnStyle: '',
           })
        }
@@ -87,27 +99,29 @@ Page({
   },
 
   onClickAddInditityImage: function(type) {
-    var that = this;
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths
-        if(type == 1) {
-          that.setData({
-             uploadImageOne: tempFilePaths[0]
-          })
-        } else if (type == 2) {
-          that.setData({
-            uploadImageTwo: tempFilePaths[0]
-          })
-        }
+    if(this.data.canSubmit) {
+      var that = this;
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          var tempFilePaths = res.tempFilePaths
+          if(type == 1) {
+            that.setData({
+               uploadImageOne: tempFilePaths[0]
+            })
+          } else if (type == 2) {
+            that.setData({
+              uploadImageTwo: tempFilePaths[0]
+            })
+          }
 
-        that.checkCansubmit();
-      }
-    })
+          that.checkCansubmit();
+        }
+      })
+    }
   },
 
   checkCansubmit:function() {
@@ -193,7 +207,17 @@ Page({
         data: {
           driverImage: this.data.uploadImageOneUrl,
           driverImageVice: this.data.uploadImageTwoUrl,
-          mobile: app.getUserMobile()
+          driverType: this.data.carTypeList[this.data.carTypeIndex],
+          driverNum: this.data.driverIdentityNumber,
+          aDriverNum: this.data.driverIdentityNumber,
+          aDriverEndDate: this.data.driverIdentityEndDate,
+          aDriverStartDate: this.data.driverIdentityStartDate,
+          driverStartDate: this.data.driverIdentityStartDate,
+          driverEndDate: this.data.driverIdentityEndDate,
+          aDriverType: this.data.carTypeList[this.data.carTypeIndex],
+          mobile: app.getUserMobile(),
+          driverName: app.getUser().name,
+          aDriverName: app.getUser().name
         },
         method: 'POST',
         success: (res) => {

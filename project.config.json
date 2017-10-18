@@ -8,7 +8,7 @@
 	},
 	"compileType": "weapp",
 	"libVersion": "1.5.4",
-	"appid": "touristappid",
+	"appid": "wx100146664acbf765",
 	"projectname": "%E9%95%BF%E5%AE%89%E7%BA%A6%E8%BD%A6",
 	"condition": {
 		"weapp": {
