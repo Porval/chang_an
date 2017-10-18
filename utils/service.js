@@ -56,16 +56,11 @@ module.exports = function (app) {
             success(res.data.data);
           } else {
             try {
-              // 如果access_token失效，就将该请求挂起，并在重新登录成功后
-              if (res.data.error_response.code === 40010) {
-                console.info('[service:40010] AccessToken不存在或已过期, 正在重新登录...');
-                return;
+              if(res.data.text) {
+                wx.showToast({
+                    title: res.data.text
+                })
               }
-              fail({
-                type: 'chang_an:service',
-                msg: res.data.error_response.msg,
-                code: res.data.error_response.code
-              });
             } catch (e) {
               fail({
                 type: 'chang_an:service',
