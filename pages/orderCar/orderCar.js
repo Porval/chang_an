@@ -40,7 +40,9 @@ Page({
       var userOp = app.storage.get('agreement:');
      if(userOp.checked) {
         this.setData({
-            agreementChecked: true
+            agreementChecked: true,
+            isCheckedAgreement: true,
+            btnStyle: ''
         })  
 
         app.storage.set('agreement:', {
