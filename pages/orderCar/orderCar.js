@@ -305,7 +305,7 @@ Page({
            access_token: app.getAccessToken()
         },
         success: (res) => {
-          if(!res.havreview) {
+          if(!res.havreview && res.list && res.list.length > 0) {
              that.showToCommentAlert(res.list[0].orderIds);
           }
         },
