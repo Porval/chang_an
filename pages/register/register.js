@@ -209,6 +209,12 @@ Page({
     });
   },
 
+  onClickAgreement: function() {
+      wx.navigateTo({
+          url: '../userAgreement/userAgreement'
+      })
+  },
+
   toNext: function () {
     if(!this.data.submitBtnStyle == 'btn-disabled') {
       wx.showLoading({

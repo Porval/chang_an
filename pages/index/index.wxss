@@ -23,6 +23,8 @@
   border-radius:50rpx;
   width: 600rpx;
   color: #1e374c;
+  display: flex;
+  justify-content: center;
   align-items: center;
   font-size: 22px;
 }
@@ -36,4 +38,6 @@
   border-radius:50rpx;
   align-items: center;
   font-size: 22px;
+  display: flex;
+  justify-content: center; 
 }

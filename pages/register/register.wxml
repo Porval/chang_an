@@ -69,7 +69,7 @@
     <view class="zan-panel-title">
       <checkbox ></checkbox>
       <text>我已阅读并同意</text>
-      <text class="font-highlight">《长安出行用户使用协议》</text>
+      <text class="font-highlight" bindtap='onClickAgreement'>《长安出行用户使用协议》</text>
     </view>
   </checkbox-group>
 
