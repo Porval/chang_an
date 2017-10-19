@@ -1,10 +1,11 @@
 <!--index.wxml-->
 <view class="index_container">
-  <text>长安出行</text>
+  <view style="display: flex; justify-content: center">
+    <image src="/drawable/img_index_banner.png" style="height: 144rpx; width: 408rpx" mode="scaleToFill"></image>
+  </view>
   <view wx:if="{{!hasLoggedIn}}" class="container" style='background:#1e374c'> 
-    <view style="margin-top: 250rpx">
       <view class="zan-form__item login_cell">
-        <image class="item_icon" src="/drawable/ic_tmp.png"></image>
+        <image class="item_icon" src="/drawable/ic_account.png"></image>
         <input
           class="zan-form__input zan-cell__bd"
           placeholder="手机号"
@@ -15,7 +16,7 @@
         />
       </view>
       <view class="zan-form__item login_cell">
-        <image class="item_icon" src="/drawable/ic_tmp.png"></image>
+        <image class="item_icon" src="/drawable/ic_psw.png"></image>
         <input
           class="zan-form__input zan-cell__bd"
           type="password"
@@ -24,7 +25,6 @@
           style="margin-left: 100rpx; -webkit-text-fill-color: #ffffff; caret-color: white"
           bindinput="pswInput"          
         />
-      </view>
     </view>
     <button class="btn_login" style='margin-top: 100rpx' bindtap="toLogin">登录</button>
     <button class="btn_register" bindtap="toRegister" style='margin-top: 90rpx'>注册</button>
