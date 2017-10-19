@@ -41,18 +41,10 @@
 
     <view class="upload-cell" bindtap='onClickAddInditityImageOne'>
         <image class="upload-image-sample" src="{{uploadImageOne}}" mode="scaleToFill"></image>
-        <view class="image-mask" style="display: {{canEdit ? 'flex': 'none'}}">
-          <image class="icon-large" src="/drawable/ic_plus.png"></image>
-          <text>点击上传身份证正面照片</text>
-        </view>
     </view>
     
     <view class="upload-cell" bindtap='onClickAddInditityImageTwo'>
         <image class="upload-image-sample" src="{{uploadImageTwo}}" mode="scaleToFill"></image>
-        <view class="image-mask" style="display: {{canEdit ? 'flex': 'none'}}">
-          <image class="icon-large" src="/drawable/ic_plus.png"></image>
-          <text>点击上传身份证反面照片</text>
-        </view>
     </view>
     <text style="color: #999999; font-size: 14px; text-align: center; display: {{canEdit ? 'block': 'none'}}">您的个人信息仅用于验证</text>
     <view style="height: 120rpx"></view>

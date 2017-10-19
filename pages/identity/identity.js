@@ -10,8 +10,8 @@ Page({
    * 页面的初始数据
    */ 
   data: {
-      uploadImageOne: '/drawable/bg_identity_1.jpeg',
-      uploadImageTwo: '/drawable/bg_identity_2.jpeg',
+      uploadImageOne: '/drawable/bg_identity_1.png',
+      uploadImageTwo: '/drawable/bg_identity_2.png',
       canEdit: true,
       btnStyle: 'btn-disabled',
       btnText: '提交审核',

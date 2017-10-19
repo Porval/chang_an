@@ -45,14 +45,15 @@
 
 .upload-cell {
   margin: 60rpx;
-  height: 270rpx;
+  height: 300rpx;
   position: relative;
 }
 
 .upload-image-sample {
-  height: 250rpx;
+  height: 300rpx;
   width: 100%;
   position: absolute;
+  border: 1rpx solid #000000;
 }
 
 .image-mask {
