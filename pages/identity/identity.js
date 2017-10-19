@@ -146,6 +146,23 @@ Page({
 
   uploadImages: function(step) {
     var that = this;
+    var filePath = '';
+    if(step == 1) {
+      filePath = this.data.uploadImageOne
+    } else {
+      filePath = this.data.uploadImageTwo
+    }
+
+    //图片已上传
+    if(filePath.indexOf("http:\/\/tmp") == -1) {
+        if(step == 1) {
+            this.uploadImages(2);
+        } else {
+            this.submitIdentify();
+        }
+        return;
+    }
+
     wx.showLoading({
         title: '正在上传图片...'
     })
@@ -197,7 +214,7 @@ Page({
           aCertifyNum: this.data.identityNumber,
           sex:  this.data.gerenalIndex == 0  ? '1' : '0',
           realName: this.data.accountName,
-          certifyNum: this.data.certifyNum,
+          certifyNum: this.data.identityNumber,
           certifyImgPositive: this.data.uploadImageOne,
           certifyImg: this.data.uploadImageTwo,
           certifyType: '1',
@@ -205,13 +222,12 @@ Page({
         },
         method: 'POST',
         success: (res) => {
-            console.log("post to submitIdentify " + JSON.parse(res));
             if(that.data.from == 'register') {
                wx.redirectTo({
                  url: '../driverIdentity/driverIdentity?from=register&name=' + that.data.accountName
                })
             } else {
-               wx.navgateBack();
+                 wx.navigateBack(1);
             }
           }
       });

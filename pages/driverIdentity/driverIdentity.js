@@ -237,13 +237,12 @@ Page({
         },
         method: 'POST',
         success: (res) => {
-            console.log("post to submitIdentify " + res);
-            if(that.data.from == 'register') {
+             if(that.data.from == 'register') {
                 wx.redirectTo({
                   url: '../identifyResult/identifyResult'
                 })
              } else {
-               wx.navgateBack();
+               wx.navigateBack(1);
              }
           }
       });
