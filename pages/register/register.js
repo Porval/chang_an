@@ -154,6 +154,7 @@ Page({
   },
 
   getAccessToken() {
+    var that = this;
     this.service({
       api: '/app/official/login.ashx',
       query: {
@@ -163,7 +164,7 @@ Page({
       success: (res) => {
           console.log("login success " + res);
           if(res.access_token) {
-              app.setToken(res.access_token, this.data.userPhone);
+              app.setToken(res.access_token, that.data.mobile);
               wx.hideLoading();
               wx.redirectTo({
                 url: '../identity/identity?from=register'
