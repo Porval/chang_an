@@ -40,7 +40,8 @@ Page({
     isCheckedAgreement: false,
     second: 60,
     btnText: "获取验证码",
-    btnStyle: "zan-btn--primary"
+    btnStyle: "zan-btn--primary",
+    submitBtnStyle: 'btn-disabled'
   },
 
   /**
@@ -82,36 +83,70 @@ Page({
       this.setData({
           mobile: e.detail.value
       });
+      this.checkCanSubmit();
   },
 
   smsCodeInput: function(e) {
       this.setData({
           smsCode: e.detail.value
-      });
+      }); 
+      this.checkCanSubmit();
   },
 
   pswInput: function(e) {
       this.setData({
           psw: e.detail.value
-      });
+      }); 
+     this.checkCanSubmit();
   },
 
   confirmPswInput: function(e) {
       this.setData({
           confirmPsw: e.detail.value
       });
+      this.checkCanSubmit();
   },
 
   checkboxChange: function(e) {
       this.setData({
           isCheckedAgreement: e.detail.value.length > 0 
       });
+      this.checkCanSubmit();
   },
 
   onAreaChange: function(e) {
       this.setData({
           areaIndex: e.detail.value
       })
+  },
+
+  checkCanSubmit: function() {
+     var canSubmit = this.data.isCheckedAgreement;
+
+    if(this.data.smsCode == null || this.data.smsCode.length <= 0) {
+        canSubmit = false;
+    }
+
+    if(this.data.psw == null || this.data.psw.length <= 0) {
+        canSubmit = false;
+    }
+
+  
+    if(this.data.confirmPsw == null || this.data.confirmPsw.length <= 0) {
+        canSubmit = false;
+    }
+
+
+    if(this.data.mobile == null || this.data.mobile.length <= 0) {
+        canSubmit = false;
+    }
+
+
+    console.log("checkCanSubmbit " + canSubmit);
+
+    this.setData({
+        submitBtnStyle : canSubmit ? '' : 'btn-disabled'
+    })  
   },
 
   toConnectService: function(e) {
@@ -175,28 +210,30 @@ Page({
   },
 
   toNext: function () {
-    wx.showLoading({
-        title: "提交中..."
-    });
-    var that = this;
-    this.service({
-        api: '/app/official/register.ashx',
-        query: {
-          hostId: this.data.areaCode[this.data.areaIndex],
-          mobile: this.data.mobile,
-          validCode: this.data.smsCode,
-          txtPassWord: this.data.psw,
-          txtRePassWord: this.data.confirmPsw,
-          from: 6
-        },
-        success: (res) => {
-            that.getAccessToken();
-        },
-        fail: (res)=> {
-            wx.showToast({
-                title: "发送失败请重试"
-            })
-        } 
-    });
+    if(!this.data.submitBtnStyle == 'btn-disabled') {
+      wx.showLoading({
+          title: "提交中..."
+      });
+      var that = this;
+      this.service({
+          api: '/app/official/register.ashx',
+          query: {
+            hostId: this.data.areaCode[this.data.areaIndex],
+            mobile: this.data.mobile,
+            validCode: this.data.smsCode,
+            txtPassWord: this.data.psw,
+            txtRePassWord: this.data.confirmPsw,
+            from: 6
+          },
+          success: (res) => {
+              that.getAccessToken();
+          },
+          fail: (res)=> {
+              wx.showToast({
+                  title: "发送失败请重试"
+              })
+          } 
+      });
+    }
   }
 })

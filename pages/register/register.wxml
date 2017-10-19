@@ -73,7 +73,7 @@
     </view>
   </checkbox-group>
 
-  <button class="zan-btn zan-btn--large button-primary button-page-buttom"
+  <button class="zan-btn zan-btn--large button-primary button-page-buttom {{submitBtnStyle}}"
       bindtap='toNext'
   >下一步</button>
 </view>
