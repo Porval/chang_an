@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+     content: ""
   },
 
   /**
@@ -16,19 +16,23 @@ Page({
    */
   onLoad: function (options) {
     this.service = service(app);
+    var that = this;
+    wx.showLoading({
+        title: "加载中..."
+    })
     this.service({
-      api: '/app/official/getAppConfig.ashx',
+      api: '/app/official/getWeixinProtocol.ashx',
+      query: {
+        type: 2
+      },
       success: (res) => {
          console.log(res)
+         that.setData({
+             content: res.licenagmt.content
+         })
+         wx.hideLoading();
       } 
     }); 
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

@@ -1,4 +1,7 @@
 // pages/agreement/agreement.js
+var service = require('../../utils/service');
+const app = getApp()
+
 function countdown(that) {  
   var second = that.data.second  
   if (second == 0) {  
@@ -28,65 +31,36 @@ Page({
     btnText: "我同意 (5s)",
     btnStyle: "btn-disabled",
     btnDisabled: false,
-    second: 5
+    second: 5,
+    content: '',
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    countdown(this); 
+    var that = this;
+    this.service = service(app);
+    wx.showLoading({
+        title: "加载中..."
+    })
+    https://catest.app.ccclubs.com/app/official/getWeixinConfig.ashx?access_token=
+    this.service({
+      api: '/app/official/getWeixinConfig.ashx',
+      query: {
+        access_token: app.getAccessToken()
+      },
+      success: (res) => {
+         console.log(res)
+         that.setData({
+             content: res.testdriveRule.content
+         })
+         wx.hideLoading();
+         countdown(this);
+      } 
+    }); 
   },
 
   toAgree: function() {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

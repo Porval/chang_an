@@ -1,6 +1,6 @@
 <scroll-view>
   <view class='container'>
-    <text>协议协议协议协议协议协议协议</text>
+    <text>{{content}}</text>
   </view>
   <view style='height: 60px'>
   </view>
