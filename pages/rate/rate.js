@@ -38,7 +38,6 @@ Page({
   },
 
   checkAllReady: function() {
-    var canSubmit = this.data.commentInput && this.data.commentInput.length > 0;
     if(canSubmit) {
       for(var index in this.data.rateIdList) {
          var value = this.data.$wux.rater[this.data.rateIdList[index]].value;
@@ -68,36 +67,38 @@ Page({
   },
 
   toSubmit:function() {
-    wx.showLoading('提交中...');
-    var level = [];
-    for(var index in this.data.rateIdList) {
-        var value = this.data.$wux.rater[this.data.rateIdList[index]].value;
-        level[index] = value;
-    }
+    if(this.data.btnStyle != 'btn-disabled') {
+      wx.showLoading('提交中...');
+      var level = [];
+      for(var index in this.data.rateIdList) {
+          var value = this.data.$wux.rater[this.data.rateIdList[index]].value;
+          level[index] = value;
+      }
 
-    this.service({
-        origin: 'pre',
-        api: '/testdrive/submitReviews.ashx',
-        method: 'POST',
-        data: {
-           orderId: this.data.orderId,
-           level: level,
-           content: this.data.commentInput,
-           access_token: App.getAccessToken()
-        },
-        success: (res) => {
-          wx.hideLoading();
-          wx.navigateBack();
-          wx.showToast({
-              title: "提交成功"
-          })
-        },
-        fail: (res)=> {
+      this.service({
+          origin: 'pre',
+          api: '/testdrive/submitReviews.ashx',
+          method: 'POST',
+          data: {
+             orderId: this.data.orderId,
+             level: level,
+             content: this.data.commentInput,
+             access_token: App.getAccessToken()
+          },
+          success: (res) => {
             wx.hideLoading();
+            wx.navigateBack();
             wx.showToast({
-                title: "提交失败请重新提交"
+                title: "提交成功"
             })
-        }
-    });  
+          },
+          fail: (res)=> {
+              wx.hideLoading();
+              wx.showToast({
+                  title: "提交失败请重新提交"
+              })
+          }
+      });  
+    }
   }
 })
