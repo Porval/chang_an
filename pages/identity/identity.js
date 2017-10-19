@@ -31,7 +31,7 @@ Page({
     var dbId = options.dbId;
     var vData = app.db.get(dbId);
     var from = options.from;
-    this.service = service(this);
+    this.service = service(app);
     
     if(vData) {
        var btnStyle = '';

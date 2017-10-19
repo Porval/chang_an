@@ -20,7 +20,7 @@ Page({
   onLoad: function (options) {
     var orderId = options.orderId;
     var that = this;
-    this.service = service(this);
+    this.service = service(app);
 
     this.setData({
         orderId: orderId

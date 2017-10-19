@@ -51,6 +51,6 @@ Page({
         }) 
     }
 
-    this.service = service(this);
+    this.service = service(app);
   }
 })

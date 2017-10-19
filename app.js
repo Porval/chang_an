@@ -55,6 +55,10 @@ App({
     return this.globalData.user;
   },
 
+  logout: function() {
+    wx.clearStorageSync();
+  },
+
   Wux: Wux, 
   globalData: {
   	user: null,

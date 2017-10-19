@@ -32,7 +32,7 @@ Page({
     var from = options.from;
     var accountName = options.name;
     var vData = app.db.get(dbId);
-    this.service = service(this);
+    this.service = service(app);
       
     if(vData) {
        var btnStyle = '';

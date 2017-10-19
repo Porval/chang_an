@@ -56,12 +56,23 @@ module.exports = function (app) {
             success(res.data.data);
           } else {
             try {
+              if(res.data.code == "100") {
+                 console.log("clean storage");
+                 app.globalData.user = null
+                 app.globalData.hasToken = false
+                 app.globalData.token = null
+                 app.logout()
+                 wx.reLaunch({
+                      url: '../index/index'
+                 })
+              }
               if(res.data.text) {
                 wx.showToast({
                     title: res.data.text
                 })
               }
             } catch (e) {
+              console.log(e)
               fail({
                 type: 'chang_an:service',
                 msg: '服务器错误',

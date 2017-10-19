@@ -25,7 +25,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.service = service(this);
+      this.service = service(app);
       this.setData({
           user: app.getUser(),
           orderMobile: app.getUser().mobile
