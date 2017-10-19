@@ -238,15 +238,13 @@ Page({
         method: 'POST',
         success: (res) => {
             console.log("post to submitIdentify " + res);
-            if(res.code == 200) {
-                if(that.data.from == 'register') {
-                   wx.redirectTo({
-                      url: '../identifyResult/identifyResult'
-                   })
-                } else {
-                   wx.navgateBack();
-                }
-            }
+            if(that.data.from == 'register') {
+                wx.redirectTo({
+                  url: '../identifyResult/identifyResult'
+                })
+             } else {
+               wx.navgateBack();
+             }
           }
       });
   },

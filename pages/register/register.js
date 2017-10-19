@@ -164,6 +164,10 @@ Page({
           console.log("login success " + res);
           if(res.access_token) {
               app.setToken(res.access_token, this.data.userPhone);
+              wx.hideLoading();
+              wx.redirectTo({
+                url: '../identity/identity?from=register'
+            })
           }
         }
     });
@@ -185,10 +189,7 @@ Page({
           from: 6
         },
         success: (res) => {
-            app.setToken(res.data.token);
-            wx.redirectTo({
-                url: '../identity/identity?from=register'
-            })
+            that.getAccessToken();
         },
         fail: (res)=> {
             wx.showToast({

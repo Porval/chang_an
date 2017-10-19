@@ -137,6 +137,8 @@ Page({
         canSubmit = false;
     }
 
+    console.log("checkCanSubmbit " + canSubmit);
+
     this.setData({
         btnStyle : canSubmit ? '' : 'btn-disabled'
     })  
@@ -149,7 +151,7 @@ Page({
     })
     wx.uploadFile({
       url: "https://static.ccclubs.com/upload/up.do?app=chango",
-      filePath: that.data.uploadImageOne, 
+      filePath: step == 1 ? that.data.uploadImageOne : that.data.uploadImageTwo,
       header: { "Content-Type": "multipart/form-data" },
       name: 'file',
       success: function (res) {
@@ -204,14 +206,12 @@ Page({
         method: 'POST',
         success: (res) => {
             console.log("post to submitIdentify " + JSON.parse(res));
-            if(res.code == 200) {
-                if(that.data.from == 'register') {
-                   wx.redirectTo({
-                      url: '../driverIdentity/driverIdentity?from=register&name=' + that.data.accountName
-                   })
-                } else {
-                   wx.navgateBack();
-                }
+            if(that.data.from == 'register') {
+               wx.redirectTo({
+                 url: '../driverIdentity/driverIdentity?from=register&name=' + that.data.accountName
+               })
+            } else {
+               wx.navgateBack();
             }
           }
       });
