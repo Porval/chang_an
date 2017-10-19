@@ -61,6 +61,9 @@ Page({
   },
 
   toAgree: function() {
-
+    app.storage.set('agreement:', {
+          checked: true
+    })
+    wx.navigateBack();
   }
 })

@@ -18,7 +18,9 @@ Page({
     carIndex: 0,
     firstLoad: true,
     user: null,
-    adList: ['/drawable/order_page_span.png']
+    adList: ['/drawable/order_page_span.png'],
+    agreementChecked: false,
+    btnStyle: 'btn-disabled'
   },
 
   /**
@@ -32,6 +34,28 @@ Page({
       })
       this.loadCityList();
       this.loadAds();
+  },
+
+  onShow: function() {
+      var userOp = app.storage.get('agreement:');
+     if(userOp.checked) {
+        this.setData({
+            agreementChecked: true
+        })  
+
+        app.storage.set('agreement:', {
+            checked: false
+        })
+     }
+  },
+
+  checkboxChange: function(e) {
+     var checked = e.detail.value.length > 0;
+
+     this.setData({
+          isCheckedAgreement: checked,
+          btnStyle: checked ? '' : 'btn-disabled'
+     });
   },
 
   loadAds: function() {
@@ -260,40 +284,42 @@ Page({
   },
   
   toOrder: function() {
-    var that = this;
-    wx.showLoading({
-      title: "提交中..."
-    });
-    this.service({
-        origin: 'pre',
-        api: '/testdrive/subApplication.ashx',
-        method: 'POST',
-        data: {
-           sex: this.data.user.sex == 1 ? 'man': 'woman',
-           name: this.data.user.name,
-           mobile: this.data.orderMobile,
-           city: this.data.cityCodeList[this.data.cityIndex],
-           area: this.data.areaCodeList[this.data.areaIndex],
-           storeId: this.data.shopCodeList[this.data.shopIndex],
-           modelId: this.data.carCodeList[this.data.carIndex],
-           access_token: app.getAccessToken()
-        },
-        success: (res) => {
-          wx.navigateTo({
-             url: '../orderSuccess/orderSuccess',
-          })
-          wx.hideLoading();
-        },
-        fail: (res)=> {
-            wx.showToast({
-                title: "获取信息失败"
+    if(this.data.btnStyle != 'btn-disabled') {
+      var that = this;
+      wx.showLoading({
+        title: "提交中..."
+      });
+      this.service({
+          origin: 'pre',
+          api: '/testdrive/subApplication.ashx',
+          method: 'POST',
+          data: {
+             sex: this.data.user.sex == 1 ? 'man': 'woman',
+             name: this.data.user.name,
+             mobile: this.data.orderMobile,
+             city: this.data.cityCodeList[this.data.cityIndex],
+             area: this.data.areaCodeList[this.data.areaIndex],
+             storeId: this.data.shopCodeList[this.data.shopIndex],
+             modelId: this.data.carCodeList[this.data.carIndex],
+             access_token: app.getAccessToken()
+          },
+          success: (res) => {
+            wx.navigateTo({
+               url: '../orderSuccess/orderSuccess',
             })
+            wx.hideLoading();
+          },
+          fail: (res)=> {
+              wx.showToast({
+                  title: "获取信息失败"
+              })
 
-            wx.reLaunch({
-              url: "./index/index"
-            })
-        } 
-    });
+              wx.reLaunch({
+                url: "./index/index"
+              })
+          } 
+      });
+    }
   },
 
   checkUnRateOrder: function() {

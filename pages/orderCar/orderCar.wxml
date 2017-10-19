@@ -80,16 +80,18 @@
 
       </view>
 
-      <view class="zan-panel-title"  style='margin-top: 20rpx; padding-left: 0px'>
-        <checkbox id="@+id/check_agreement"></checkbox>
-        <text>我已阅读并同意</text>
-        <text class="font-highlight" bindtap='onClickAgreement'>《长安出行试驾协议》</text>
-      </view>
+    <checkbox-group bindchange="checkboxChange">
+        <view class="zan-panel-title"  style='margin-top: 20rpx; padding-left: 0px'>
+          <checkbox checked="{{agreementChecked}}" ></checkbox>
+          <text>我已阅读并同意</text>
+          <text class="font-highlight" bindtap='onClickAgreement'>《长安出行试驾协议》</text>
+        </view>
+    </checkbox-group>
     </view>
     <view style='height: 70px'>
     </view>
   </view>
 </scroll-view>  
-<button class="zan-btn zan-btn--large button-primary button-page-buttom"
+<button class="zan-btn zan-btn--large button-primary button-page-buttom {{btnStyle}}"
       bindtap='toOrder'
   >提交申请</button>

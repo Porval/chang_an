@@ -34,7 +34,7 @@ App({
   		this.storage.set('app:token', {
             accessToken: token,
             mobile: mobile
-          });
+      });
   	}
   },
   getAccessToken: function() {
