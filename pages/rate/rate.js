@@ -20,7 +20,7 @@ Page({
   onLoad: function (options) {
     var orderId = options.orderId;
     var that = this;
-    this.service = service(app);
+    this.service = service(App);
 
     this.setData({
         orderId: orderId
@@ -38,16 +38,15 @@ Page({
   },
 
   checkAllReady: function() {
-    if(canSubmit) {
-      for(var index in this.data.rateIdList) {
-         var value = this.data.$wux.rater[this.data.rateIdList[index]].value;
-         if(value <= 0) {
-            canSubmit = false;
-            break;
-         }
+    var canSubmit = true;
+    for(var index in this.data.rateIdList) {
+       var value = this.data.$wux.rater[this.data.rateIdList[index]].value;
+      if(value <= 0) {
+           canSubmit = false;
+          break;
       }
     }
-
+    
     this.setData({
       btnStyle: canSubmit ? '' : 'btn-disabled'
     });
