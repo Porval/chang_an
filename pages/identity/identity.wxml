@@ -40,7 +40,7 @@
     </view>
 
     <view class="upload-cell" bindtap='onClickAddInditityImageOne'>
-        <image class="upload-image-sample" src="{{uploadImageOne}}" mode="scaleToFill"></image>
+        <image class="upload-image-sample" src="{{uploadImageOne}}" bindload="onLoadImageFinish" mode="scaleToFill"></image>
     </view>
     
     <view class="upload-cell" bindtap='onClickAddInditityImageTwo'>

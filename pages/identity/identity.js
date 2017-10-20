@@ -15,8 +15,6 @@ Page({
       canEdit: true,
       btnStyle: 'btn-disabled',
       btnText: '提交审核',
-      uploadImageOneUrl: '',
-      uploadImageTwoUrl: '',
       accountName: null,
       identityNumber: null,
       gerenal: ['男', '女'],
@@ -116,6 +114,13 @@ Page({
         }
       })
     }
+  },
+
+  onLoadImageFinish: function() {
+     console.log("onLoadImageFinish " + this.data.uploadImageOne);
+     this.setData({
+        uploadImageOne: this.data.uploadImageOne
+     })
   },
 
   checkCanSubmbit: function() {
