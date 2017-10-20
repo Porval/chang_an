@@ -39,7 +39,7 @@ Page({
             vStats: vData.vStatus,
             canEdit: vData.vStatus == 3,
             btnStyle: 'btn-disabled',
-            uploadImageOne: vData.urlOne,
+            uploadImageOne: "https://img.yzcdn.cn/public_files/2017/10/19/e1355fdab3cef4705c0e756692320019.png",
             uploadImageTwo: vData.urlTwo,
             accountName: vData.accountName,
             identityNumber: vData.certifyNum,

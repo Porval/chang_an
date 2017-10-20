@@ -10,6 +10,9 @@ Page({
     userPsw: ""
   },
   toLogin: function() {
+    wx.showLoading({
+        title: "登录中..."
+    })
     this.service({
       api: '/app/official/login.ashx',
       query: {
@@ -24,6 +27,7 @@ Page({
                 url: '../identifyResult/identifyResult'
               })
           }
+          wx.hideLoading();
         }
       });
     console.log("usePhone " + this.data.userPhone);
