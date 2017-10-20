@@ -216,7 +216,7 @@ Page({
   },
 
   toNext: function () {
-    if(!this.data.submitBtnStyle == 'btn-disabled') {
+    if(this.data.submitBtnStyle != 'btn-disabled') {
       wx.showLoading({
           title: "提交中..."
       });
