@@ -222,7 +222,7 @@ Page({
     this.setData({
         shopIndex: shopIndex
     });
-    this.toShopChanged(this.data.shopList[shopIndex]);
+    this.toShopChanged(this.data.shopCodeList[shopIndex]);
   },
 
   toShopChanged: function(storeId) {
