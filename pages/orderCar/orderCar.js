@@ -37,8 +37,8 @@ Page({
   },
 
   onShow: function() {
-      var userOp = app.storage.get('agreement:');
-     if(userOp.checked) {
+     var userOp = app.storage.get('agreement:');
+     if(userOp && userOp.checked) {
         this.setData({
             agreementChecked: true,
             isCheckedAgreement: true,
