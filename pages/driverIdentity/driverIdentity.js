@@ -225,15 +225,10 @@ Page({
           driverImageVice: this.data.uploadImageTwoUrl,
           driverType: this.data.carTypeList[this.data.carTypeIndex],
           driverNum: this.data.driverIdentityNumber,
-          aDriverNum: this.data.driverIdentityNumber,
-          aDriverEndDate: this.data.driverIdentityEndDate,
-          aDriverStartDate: this.data.driverIdentityStartDate,
           driverStartDate: this.data.driverIdentityStartDate,
           driverEndDate: this.data.driverIdentityEndDate,
-          aDriverType: this.data.carTypeList[this.data.carTypeIndex],
           mobile: app.getUserMobile(),
           driverName: this.data.accountName,
-          aDriverName: this.data.accountName
         },
         method: 'POST',
         success: (res) => {

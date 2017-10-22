@@ -214,9 +214,6 @@ Page({
       this.service({
         api: '/app/official/authIdentity.ashx',
         data: {
-          aRealName: this.data.accountName,
-          aSex: this.data.gerenalIndex == 0  ? '1' : '0',
-          aCertifyNum: this.data.identityNumber,
           sex:  this.data.gerenalIndex == 0  ? '1' : '0',
           realName: this.data.accountName,
           certifyNum: this.data.identityNumber,
