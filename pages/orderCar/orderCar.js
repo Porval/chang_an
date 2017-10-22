@@ -190,7 +190,7 @@ Page({
            areaId: areaCode
         },
         success: (res) => {
-            if(res.list) {
+            if(res.list && res.list.length > 0) {
                 var shopList = [];
                 var shopCodeList = [];
                 for(var index in res.list) {
@@ -203,6 +203,10 @@ Page({
                     shopIndex: 0
                 })
                 that.toShopChanged(shopCodeList[0]);
+            } else {
+              wx.showToast({
+                title: "该区域暂无4S门店"
+              })
             }
         },
         fail: (res)=> {
@@ -237,7 +241,7 @@ Page({
            storeId: storeId
         },
         success: (res) => {
-            if(res.list) {
+            if(res.list && res.list.length > 0) {
                 var carList = [];
                 var carCodeList = [];
                 for(var index in res.list) {                

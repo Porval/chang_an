@@ -29,7 +29,7 @@
       /> 
       </view>
       <view style='margin-top: 20rpx;'>
-        <text>选择经销商</text>
+        <text>选择4S店</text>
         <view style='display: flex'> 
           <view class="zan-form__input zan-cell__bd item-picker-result">
             <picker
