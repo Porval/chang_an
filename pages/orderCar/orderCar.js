@@ -19,7 +19,7 @@ Page({
     firstLoad: true,
     user: null,
     adList: ['/drawable/order_page_span.png'],
-    agreementChecked: false,
+    agreementChecked: true,
     btnStyle: 'btn-disabled'
   },
 
