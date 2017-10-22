@@ -23,13 +23,32 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.service({
+    this.refreshUserInfo();
+  },
+
+  onPullDownRefresh: function() {
+    this.refreshUserInfo("refresh");
+  },
+
+  refreshUserInfo: function(from) {
+     if(from == "refresh") {
+       wx.showLoading({
+          title: "正在刷新...."
+       })
+     }
+
+     this.service({
         api: '/app/official/getMemberInfo.ashx',
         query: {
           access_token: app.getAccessToken()
         },
         success: (res) => {
             console.log("get user info " + res);
+            if(from == "refresh") {
+              wx.showToast({
+                  title: "刷新成功"
+              })
+            }
             this.setData({
                 user: res.map
             })
@@ -45,9 +64,15 @@ Page({
             wx.reLaunch({
               url: "./index/index"
             })
-        } 
-    });  
+        },
+        complete: (res)=> {
+          wx.hideLoading();
+          wx.stopPullDownRefresh();
+        }
+    });
   },
+
+
   refreshStatus() {
     if(this.data.user) {
       var vreal = this.data.user.vreal;
