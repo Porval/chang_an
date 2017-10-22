@@ -63,7 +63,8 @@ Page({
             vStats: vData.vStatus,
             canSubmit: true,
             btnStyle: '',
-            accountName: app.getUser().name
+            accountName: app.getUser().name，
+            driverIdentityNumber: app.getUser().certifyNum
           })
        }
     }
