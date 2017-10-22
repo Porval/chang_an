@@ -119,7 +119,7 @@ Page({
         driverType: this.data.user.driverType,
         driverEndDate: this.data.user.driverEndDate,
         driverStartDate: this.data.user.driverStartDate,
-        driverNum: this.data.user.driverNum
+        driverNum: this.data.user.certifyNum
     };
     var dbId = app.db.set(vData);
     wx.navigateTo({
