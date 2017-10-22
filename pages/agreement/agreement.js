@@ -44,9 +44,12 @@ Page({
     this.service = service(app);
 
     if(toSubmit) {
+       var dbId = options.dbId;
+       var vOrder = app.db.get(dbId);
        this.setData({
           toSubmit: toSubmit,
-          btnDisplay: 'block'
+          btnDisplay: 'block',
+          vOrder: vOrder
        })
     }
 
@@ -73,11 +76,44 @@ Page({
   },
 
   toAgree: function() {
+    //if(this.data.btnStyle != 'btn-disabled') {
+     // app.storage.set('agreement:', {
+       //     checked: true
+      //})
+    //}
+    //wx.navigateBack();
+    this.toOrder();
+  },
+
+  toOrder: function() {
     if(this.data.btnStyle != 'btn-disabled') {
-      app.storage.set('agreement:', {
-            checked: true
-      })
+      var that = this;
+      var vOrder = this.data.vOrder;
+      wx.showLoading({
+        title: "提交中..."
+      });
+      this.service({
+          origin: 'pre',
+          api: '/testdrive/subApplication.ashx',
+          method: 'POST',
+          data: vOrder,
+          success: (res) => {
+            wx.redirecTo({
+               url: '../orderSuccess/orderSuccess',
+            })
+            wx.hideLoading();
+          },
+          fail: (res)=> {
+              wx.showToast({
+                  title: "获取信息失败"
+              })
+
+              wx.reLaunch({
+                url: "./index/index"
+              })
+          } 
+      });
     }
-    wx.navigateBack();
   }
+
 })
