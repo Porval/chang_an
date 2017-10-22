@@ -20,6 +20,7 @@ Page({
     user: null,
     adList: ['/drawable/order_page_span.png'],
     agreementChecked: true,
+    isCheckedAgreement: true,
     btnStyle: 'btn-disabled'
   },
 
