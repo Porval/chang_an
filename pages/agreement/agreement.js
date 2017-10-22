@@ -44,7 +44,7 @@ Page({
     var toSubmit = options.toSubmit;
     this.service = service(app);
 
-
+    //flex布局 原因是fixed属性，在timeout结束后，iphone刷新有bug, 整个button会消失
     wx.getSystemInfo({
       success: function(res) {
         var pageHeight = res.windowHeight;
