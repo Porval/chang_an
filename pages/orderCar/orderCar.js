@@ -55,9 +55,19 @@ Page({
      var checked = e.detail.value.length > 0;
 
      this.setData({
-          isCheckedAgreement: checked,
-          btnStyle: checked ? '' : 'btn-disabled'
+          isCheckedAgreement: checked
      });
+
+     this.checkCanSubmit();
+
+  },
+
+  checkCanSubmit: function() {
+      var checked = this.data.isCheckedAgreement;
+      checked = checked && (this.data.shopList && this.data.shopList.length > 0);
+      this.setData({
+        btnStyle: checked ? '' : 'btn-disabled'
+      });
   },
 
   loadAds: function() {
@@ -255,7 +265,7 @@ Page({
                 })
                 wx.hideLoading();
 
-
+                that.checkCanSubmit();
                 if(that.data.firstLoad) {
                     that.setData({
                       firstLoad: false
