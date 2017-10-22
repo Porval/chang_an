@@ -34,6 +34,7 @@ Page({
     toSubmit: false,
     second: 5,
     content: '',
+    contentHeight: 500
   },
   /**
    * 生命周期函数--监听页面加载
@@ -42,6 +43,22 @@ Page({
     var that = this;
     var toSubmit = options.toSubmit;
     this.service = service(app);
+
+
+    wx.getSystemInfo({
+      success: function(res) {
+        var pageHeight = res.windowHeight;
+        var contentHeight = pageHeight;
+        if(toSubmit) {
+            contentHeight = pageHeight - 50;
+        }
+
+        that.setData({
+            contentHeight: contentHeight
+        })
+      }
+    })
+
 
     if(toSubmit) {
        var dbId = options.dbId;
