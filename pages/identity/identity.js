@@ -209,7 +209,7 @@ Page({
   },
 
   submitIdentify: function() {
-      if(!this.checkIdentifyNumber(this.data.driverIdentityNumber)) {
+      if(!this.checkIdentifyNumber(this.data.identityNumber)) {
           return;
       }
 
@@ -219,7 +219,7 @@ Page({
         data: {
           sex:  this.data.gerenalIndex == 0  ? '1' : '0',
           realName: this.data.accountName,
-          certifyNum: this.data.identityNumber,
+          certifyNum: this.data.identityNumber.toUpperCase(),
           certifyImgPositive: this.data.uploadImageOne,
           certifyImg: this.data.uploadImageTwo,
           certifyType: '1',

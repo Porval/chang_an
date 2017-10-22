@@ -246,7 +246,7 @@ Page({
           driverImage: this.data.uploadImageOneUrl,
           driverImageVice: this.data.uploadImageTwoUrl,
           driverType: this.data.carTypeList[this.data.carTypeIndex],
-          driverNum: this.data.driverIdentityNumber,
+          driverNum: this.data.driverIdentityNumber.toUpperCase(),
           driverStartDate: this.data.driverIdentityStartDate,
           driverEndDate: this.data.driverIdentityEndDate,
           mobile: app.getUserMobile(),
