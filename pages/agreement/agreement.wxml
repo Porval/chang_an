@@ -5,6 +5,6 @@
   <view style='height: 60px'>
   </view>
 </scroll-view>
-<button class="zan-btn zan-btn--large button-page-buttom {{btnStyle}}"
+<button class="zan-btn zan-btn--large button-page-buttom button-primary {{btnStyle}}" style="display: {{btnDisplay}}"
       bindtap='toAgree'
   >{{btnText}}</button>

@@ -7,7 +7,7 @@ function countdown(that) {
   if (second == 0) {  
     that.setData({  
       btnText: "我同意",
-      btnStyle: "button-primary"
+      btnStyle: ""
     });  
   return ;  
  }  
@@ -30,7 +30,8 @@ Page({
   data: {
     btnText: "我同意 (5s)",
     btnStyle: "btn-disabled",
-    btnDisabled: false,
+    btnDisplay: 'none',
+    toSubmit: false,
     second: 5,
     content: '',
   },
@@ -39,11 +40,19 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    var toSubmit = options.toSubmit;
     this.service = service(app);
+
+    if(toSubmit) {
+       this.setData({
+          toSubmit: toSubmit,
+          btnDisplay: 'block'
+       })
+    }
+
     wx.showLoading({
         title: "加载中..."
     })
-    https://catest.app.ccclubs.com/app/official/getWeixinConfig.ashx?access_token=
     this.service({
       api: '/app/official/getWeixinConfig.ashx',
       query: {
@@ -55,15 +64,20 @@ Page({
              content: res.testdriveRule.content
          })
          wx.hideLoading();
-         countdown(this);
+         if(that.data.toSubmit) {
+             countdown(this);
+         }
       } 
-    }); 
+    });
+
   },
 
   toAgree: function() {
-    app.storage.set('agreement:', {
-          checked: true
-    })
+    if(this.data.btnStyle != 'btn-disabled') {
+      app.storage.set('agreement:', {
+            checked: true
+      })
+    }
     wx.navigateBack();
   }
 })
