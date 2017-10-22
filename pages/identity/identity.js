@@ -227,16 +227,61 @@ Page({
         },
         method: 'POST',
         success: (res) => {
-            if(that.data.from == 'register') {
-               wx.redirectTo({
-                 url: '../driverIdentity/driverIdentity?from=register&name=' + that.data.accountName
-               })
-            } else {
-                 wx.navigateBack(1);
-            }
-          }
+           that.toAliCheck();
+        }
       });
-  },
+ },
+ 
+ toAliCheck: function() {
+    var that = this;
+    var inputs = [];
+    var imageOne = {
+       image : {
+          dataType: 50,
+          dataValue: "111"
+       },
+       configure: {
+          dataType: 50,
+          dataValue: "{\"side\":\"face\"}" 
+       }
+    }
+
+    var imageTwo = {
+       image : {
+          dataType: 50,
+          dataValue: "111"
+       },
+       configure: {
+          dataType: 50,
+          dataValue: "{\"side\":\"face\"}" 
+       }
+    }
+
+    inputs[0] = imageOne;
+    inputs[1] = imageTwo;
+ 
+    this.service({
+        origin: 'dm',
+        api: '/rest/160601/ocr/ocr_idcard.json',
+        data: {
+          inputs: inputs
+        },
+        method: 'POST',
+        success: (res) => {
+             that.sumbitSuccess();
+        }
+    });
+ },
+
+ sumbitSuccess: function() {
+    if(this.data.from == 'register') {
+        wx.redirectTo({
+          url: '../driverIdentity/driverIdentity?from=register&name=' + that.data.accountName
+        })
+    } else {
+        wx.navigateBack(1);
+    } 
+ },
 
  checkIdentifyNumber: function(identityNumber) {
     var reg2 = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
