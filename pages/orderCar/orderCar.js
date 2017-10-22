@@ -214,6 +214,15 @@ Page({
                 })
                 that.toShopChanged(shopCodeList[0]);
             } else {
+              this.setData({
+                  shopList: [],
+                  shopCodeList: [],
+                  shopIndex: 0,
+                  carList: [],
+                  carCodeList: [],
+                  carIndex: 0
+              })
+
               wx.showToast({
                 title: "该区域暂无4S门店"
               })
