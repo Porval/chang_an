@@ -176,6 +176,24 @@ Page({
 
   uploadImages: function(step) {
     var that = this;
+
+    var filePath = '';
+    if(step == 1) {
+      filePath = this.data.uploadImageOne
+    } else {
+      filePath = this.data.uploadImageTwo
+    }
+
+       //图片已上传
+    if(filePath.indexOf("http:\/\/tmp") == -1) {
+        if(step == 1) {
+            this.uploadImages(2);
+        } else {
+            this.submitIdentify();
+        }
+        return;
+    }
+
     wx.showLoading({
         title: '正在上传图片...'
     })
@@ -217,6 +235,10 @@ Page({
   },
 
   submitIdentify: function() {
+      if(!this.checkIdentifyNumber(this.data.driverIdentityNumber)) {
+          return;
+      }
+      
       var that = this;
       this.service({
         api: '/app/official/authDriver.ashx',
@@ -241,6 +263,19 @@ Page({
              }
           }
       });
+  },
+
+  checkIdentifyNumber: function(identityNumber) {
+   var reg2 = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
+
+  if(reg2.test(identityNumber)) {
+       return true;
+  } else {
+       wx.showToast({
+          title: "请输入正确的证件号码！"
+        })
+       return false;
+    }
   },
 
   uploadError: function() {

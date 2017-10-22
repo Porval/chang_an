@@ -9,6 +9,7 @@
           bindinput="inputDriverIdentityNumber"
           disabled="{{!canSubmit}}"
           value="{{driverIdentityNumber}}"
+          maxlength="18"
         />
       </view>
       <view class="zan-cell zan-form__item">

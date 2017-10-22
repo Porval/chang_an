@@ -194,7 +194,6 @@ Page({
                that.setData({
                   uploadImageTwo: response.url
                }) 
-               that.submitIdentify();
             }
           }
         }
@@ -210,6 +209,10 @@ Page({
   },
 
   submitIdentify: function() {
+      if(!this.checkIdentifyNumber(this.data.driverIdentityNumber)) {
+          return;
+      }
+
       var that = this;
       this.service({
         api: '/app/official/authIdentity.ashx',
@@ -233,6 +236,19 @@ Page({
             }
           }
       });
+  },
+
+ checkIdentifyNumber: function(identityNumber) {
+    var reg2 = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
+
+    if(reg2.test(identityNumber)) {
+         return true;
+    } else {
+         wx.showToast({
+            title: "请输入正确的证件号码！"
+          })
+         return false;
+    }
   },
 
   uploadError: function() {
