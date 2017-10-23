@@ -17,7 +17,7 @@ Page({
       btnText: '提交审核',
       accountName: null,
       identityNumber: null,
-      gerenal: ['男', '女'],
+      gerenal: ['请选择性别','男', '女'],
       gerenalIndex: 0,
       from: ''
   },
@@ -43,7 +43,7 @@ Page({
             uploadImageTwo: vData.urlTwo,
             accountName: vData.accountName,
             identityNumber: vData.certifyNum,
-            gerenalIndex: vData.sex == 1 ? 0 : 1
+            gerenalIndex: vData.sex == 1 ? 1 : 2
           })
           this.checkCanSubmbit();
        } else {
@@ -213,11 +213,28 @@ Page({
           return;
       }
 
+      var sex = '1';
+      if(this.data.gerenalIndex == 0) {
+        wx.showToast({
+            title: '请选择性别！'
+        })
+
+        return;
+      } else if(this.data.gerenalIndex == 1) {
+        sex = 1;
+      } else {
+         sex = 0;
+      }
+        
+      wx.showLoading({
+        title: '正在提交...'
+      })
+
       var that = this;
       this.service({
         api: '/app/official/authIdentity.ashx',
         data: {
-          sex:  this.data.gerenalIndex == 0  ? '1' : '0',
+          sex:  sex,
           realName: this.data.accountName,
           certifyNum: this.data.identityNumber.toUpperCase(),
           certifyImgPositive: this.data.uploadImageOne,
@@ -228,6 +245,9 @@ Page({
         method: 'POST',
         success: (res) => {
            that.toAliCheck();
+        },
+        complete: (res) => {
+           wx.hideLoading();
         }
       });
  },
