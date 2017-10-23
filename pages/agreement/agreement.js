@@ -115,7 +115,7 @@ Page({
           method: 'POST',
           data: vOrder,
           success: (res) => {
-            wx.redirecTo({
+            wx.redirectTo({
                url: '../orderSuccess/orderSuccess',
             })
             wx.hideLoading();
