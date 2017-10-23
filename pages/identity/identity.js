@@ -232,7 +232,7 @@ Page({
       } else if(this.data.gerenalIndex == 1) {
         sex = 1;
       } else {
-         sex = 0;
+        sex = 0;
       }
         
       wx.showLoading({
