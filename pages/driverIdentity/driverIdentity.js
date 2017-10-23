@@ -207,7 +207,7 @@ Page({
     })
     wx.uploadFile({
       url: "https://static.ccclubs.com/upload/up.do?app=chango",
-      filePath: that.data.uploadImageOne, 
+      filePath: filePath, 
       header: { "Content-Type": "multipart/form-data" },
       name: 'file',
       success: function (res) {
@@ -220,13 +220,13 @@ Page({
           } else {
             if(step == 1) {
                that.setData({
-                  uploadImageOneUrl: response.url,
+                  uploadImageOne: response.url,
                   needUploadOne: false
                }) 
                that.uploadImages(2);
             } else {
                that.setData({
-                  uploadImageTwoUrl: response.url,
+                  uploadImageTwo: response.url,
                   needUploadTwo: false
                }) 
                that.submitIdentify();
@@ -253,8 +253,8 @@ Page({
       this.service({
         api: '/app/official/authDriver.ashx',
         data: {
-          driverImage: this.data.uploadImageOneUrl,
-          driverImageVice: this.data.uploadImageTwoUrl,
+          driverImage: this.data.uploadImageOne,
+          driverImageVice: this.data.uploadImageTwo,
           driverType: this.data.carTypeList[this.data.carTypeIndex],
           driverNum: this.data.driverIdentityNumber.toUpperCase(),
           driverStartDate: this.data.driverIdentityStartDate,
