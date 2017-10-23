@@ -12,6 +12,8 @@ Page({
   data: {
       uploadImageOne: '/drawable/bg_identity_1.png',
       uploadImageTwo: '/drawable/bg_identity_2.png',
+      needUploadOne: false,
+      needUploadTwo: false,
       canEdit: true,
       btnStyle: 'btn-disabled',
       btnText: '提交审核',
@@ -102,11 +104,13 @@ Page({
           var tempFilePaths = res.tempFilePaths
           if(type == 1) {
             that.setData({
-               uploadImageOne: tempFilePaths[0]
+               uploadImageOne: tempFilePaths[0],
+               needUploadOne: true
             })
           } else if (type == 2) {
             that.setData({
-              uploadImageTwo: tempFilePaths[0]
+              uploadImageTwo: tempFilePaths[0],
+              needUploadTwo: true
             })
           }
 
@@ -152,20 +156,23 @@ Page({
   uploadImages: function(step) {
     var that = this;
     var filePath = '';
+
+    if(step == 1) {
+      if(!this.data.needUploadOne) {
+         this.uploadImages(2);
+         return;
+      }
+    } else if (step == 2) {
+      if(!this.data.needUploadTwo) {
+         this.submitIdentify();
+         return;
+      }
+    }
+
     if(step == 1) {
       filePath = this.data.uploadImageOne
     } else {
       filePath = this.data.uploadImageTwo
-    }
-
-    //图片已上传
-    if(filePath.indexOf("http:\/\/tmp") == -1) {
-        if(step == 1) {
-            this.uploadImages(2);
-        } else {
-            this.submitIdentify();
-        }
-        return;
     }
 
     wx.showLoading({
@@ -187,13 +194,16 @@ Page({
           } else {
             if(step == 1) {
                that.setData({
-                  uploadImageOne: response.url
+                  uploadImageOne: response.url,
+                  needUploadOne: false
                }) 
                that.uploadImages(2);
             } else {
                that.setData({
-                  uploadImageTwo: response.url
-               }) 
+                  uploadImageTwo: response.url,
+                  needUploadTwo: false
+               })
+              that.submitIdentify();
             }
           }
         }
@@ -244,7 +254,8 @@ Page({
         },
         method: 'POST',
         success: (res) => {
-           that.toAliCheck();
+            that.sumbitSuccess();
+           //that.toAliCheck();
         },
         complete: (res) => {
            wx.hideLoading();
