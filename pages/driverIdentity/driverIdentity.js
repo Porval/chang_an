@@ -237,9 +237,6 @@ Page({
       fail: function (e) {
         console.log(e);
         that.uploadError();
-      },
-      complete: function () {
-        wx.hideLoading();  //隐藏Toast
       }
     })
   },
@@ -264,6 +261,7 @@ Page({
         },
         method: 'POST',
         success: (res) => {
+             wx.hideLoading();
              if(that.data.from == 'register') {
                 wx.redirectTo({
                   url: '../identifyResult/identifyResult'

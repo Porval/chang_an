@@ -48,6 +48,8 @@ Page({
               wx.showToast({
                   title: "刷新成功"
               })
+            } else {
+              wx.hideLoading();
             }
             this.setData({
                 user: res.map
@@ -66,7 +68,6 @@ Page({
             })
         },
         complete: (res)=> {
-          wx.hideLoading();
           wx.stopPullDownRefresh();
         }
     });

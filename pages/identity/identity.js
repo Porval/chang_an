@@ -213,9 +213,6 @@ Page({
       fail: function (e) {
         console.log(e);
         that.uploadError();
-      },
-      complete: function () {
-        wx.hideLoading();  //隐藏Toast
       }
     })
   },
@@ -256,11 +253,8 @@ Page({
         },
         method: 'POST',
         success: (res) => {
-            that.sumbitSuccess();
-           //that.toAliCheck();
-        },
-        complete: (res) => {
-           wx.hideLoading();
+          that.sumbitSuccess();
+          wx.hideLoading();
         }
       });
  },

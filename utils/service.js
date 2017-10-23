@@ -67,6 +67,7 @@ module.exports = function (app) {
                  })
               }
               if(res.data.text) {
+                console.log("showToast");
                 wx.showToast({
                     title: res.data.text
                 })

@@ -121,8 +121,9 @@ Page({
             wx.hideLoading();
           },
           fail: (res)=> {
+              wx.hideLoading();
               wx.showToast({
-                  title: "获取信息失败"
+                  title: "提交失败"
               })
 
               wx.reLaunch({
