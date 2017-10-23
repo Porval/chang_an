@@ -106,6 +106,7 @@ Page({
     this.setData({
         carTypeIndex: e.detail.value
     })
+    this.checkCanSubmbit();
   },
 
   onClickAddInditityImageTwo: function() {

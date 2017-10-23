@@ -69,12 +69,14 @@ Page({
      this.setData({
         gerenalIndex: e.detail.value
      })
+     this.checkCanSubmbit();
   },
 
   inputIdentifyNumber: function(e) {
       this.setData({
         identityNumber: e.detail.value
       })
+      this.checkCanSubmbit();
   },
 
   inputName: function(e) {
