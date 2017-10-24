@@ -53,9 +53,8 @@ Page({
   onShow: function () {
      console.log("onShow ");
      if(!this.data.notRate) {
-         this.checkUnRateOrder();
          this.setData({
-            second: 5,
+            second: 0,
             hidden: false
          })
          countdown(this);
@@ -65,7 +64,7 @@ Page({
   onHide:function() {
      console.log("onHide ");
      this.setData({
-        second: 2,
+        second: 5,
         hidden: true
      })
   },
@@ -82,17 +81,17 @@ Page({
           if(!res.havreview && res.list && res.list.length > 0) {
              that.showToCommentAlert(res.list[0].orderIds);
           } else {
+            this.setData({
+              second: 5
+            })
             countdown(this);
           }
         },
         fail: (res)=> {
-            wx.showToast({
-                title: "获取信息失败"
-            })
-
-            wx.reLaunch({
-              url: "./index/index"
-            })
+          this.setData({
+              second: 5
+          })
+          countdown(this);
         } 
     });
   },
