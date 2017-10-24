@@ -1,66 +1,120 @@
 // pages/orderSuccess/orderSuccess.js
+const app = getApp()
+var service = require('../../utils/service');
+  
+function countdown(that) {  
+  var second = that.data.second;
+  if(that.data.notRate) {
+      return;
+  }
+  if (second == 0) {  
+    that.setData({  
+       second: 5
+    });
+
+    if(!that.data.hidden) {
+        that.checkUnRateOrder();
+    } 
+   return ;  
+ }  
+
+ var time = setTimeout(function() {
+    that.setData({  
+       second: second - 1,
+    });
+    console.log("second " + second);  
+    if(!that.data.hidden) {
+       countdown(that);
+    }  
+ },1000)  
+}
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+     second: 5,
+     hidden: true,
+     notRate: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+      this.service = service(app);
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+     console.log("onShow ");
+     if(!this.data.notRate) {
+         this.checkUnRateOrder();
+         this.setData({
+            second: 5,
+            hidden: false
+         })
+         countdown(this);
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  onHide:function() {
+     console.log("onHide ");
+     this.setData({
+        second: 2,
+        hidden: true
+     })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+  checkUnRateOrder: function() {
+     var that = this;
+     this.service({
+        origin: 'pre',
+        api: '/testdrive/getOrderId.ashx',
+        data: {
+           access_token: app.getAccessToken()
+        },
+        success: (res) => {
+          if(!res.havreview && res.list && res.list.length > 0) {
+             that.showToCommentAlert(res.list[0].orderIds);
+          } else {
+            countdown(this);
+          }
+        },
+        fail: (res)=> {
+            wx.showToast({
+                title: "获取信息失败"
+            })
+
+            wx.reLaunch({
+              url: "./index/index"
+            })
+        } 
+    });
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  showToCommentAlert: function(orderId) {
+    var that = this;
+    wx.showModal({
+      title: '您的试驾已结束，请评论',
+      cancelText: '取消',
+      confirmText: '去评价',
+      cancelColor: '#333',
+      success: function (res) {
+        if (res.confirm) {
+          wx.redirectTo({
+            url: '../rate/rate?orderId=' + orderId,
+          })
+        } else if(res.cancel) {
+          that.setData({
+              notRate: true
+          })
+        }
+      }
+    })
   }
 })
