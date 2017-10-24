@@ -21,3 +21,7 @@
   padding: 10rpx;
   border: 1rpx solid #000000; 
 }
+
+.input-holder {
+   text-align: left;
+}

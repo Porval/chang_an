@@ -58,9 +58,11 @@
       </view>
     </view>
     <view class="comments-box">
-      <input
+      <textarea
           class="zan-form__input zan-cell__bd"
+          style="height: 100%; width:100%"
           maxlength="200"
+          placeholder-class="input-holder"
           placeholder="请输入评价"  
           bindinput='onCommentChanged'
           />

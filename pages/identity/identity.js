@@ -246,8 +246,8 @@ Page({
           sex:  sex,
           realName: this.data.accountName,
           certifyNum: this.data.identityNumber.toUpperCase(),
-          certifyImgPositive: this.data.uploadImageOne,
-          certifyImg: this.data.uploadImageTwo,
+          certifyImgPositive: this.data.uploadImageTwo,
+          certifyImg: this.data.uploadImageOne,
           certifyType: '1',
           mobile: app.getUserMobile()
         },
