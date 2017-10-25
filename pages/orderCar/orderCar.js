@@ -67,12 +67,73 @@ Page({
           success: (res) => {
              if(res.list && res.list.length > 0) {
                   that.setData({
-                      defaultCityId: res.list[0].id
+                      defaultCityId: res.list[0].hostId,
+                      defaultAreaId: res.list[0].areaId,
+                      defaultShopId: res.list[0].id
                   })
                   that.setDefaultCityId();
              }
           }
       });   
+  },
+
+  setDefaultCityId: function() {
+      if(this.data.cityCodeList 
+        && this.data.cityCodeList.length > 0 
+        && this.data.defaultCityId > 0) {
+           for(var index in this.data.cityCodeList) {
+               if(this.data.cityCodeList[index] == this.data.defaultCityId) {
+                   console.log("set defaultCityId " + this.data.cityCodeList[index]);
+                   this.setData({
+                        cityIndex: index,
+                        defaultCityId: 0
+                   })
+                   this.toCityChanged(this.data.cityCodeList[index]);
+                   return true;
+               }
+           }
+      }
+
+      return false;
+  },
+  setDefaultAreaId: function() {
+      if(this.data.areaCodeList 
+        && this.data.areaCodeList.length > 0 
+        && this.data.defaultAreaId > 0) {
+           for(var index in this.data.areaCodeList) {
+               if(this.data.areaCodeList[index] == this.data.defaultAreaId) {
+                   console.log("set defaultAreaId " + this.data.areaCodeList[index]);
+                   this.setData({
+                        areaIndex: index,
+                        defaultAreaId: 0
+                   })
+                   this.toAreaChanged(this.data.areaCodeList[index]);
+                   return true;
+               }
+           }
+      }
+
+      return false;
+  },
+
+  setDefaultShopId: function() {
+      if(this.data.shopCodeList 
+        && this.data.shopCodeList.length > 0 
+        && this.data.defaultShopId > 0) {
+           for(var index in this.data.shopCodeList) {
+               if(this.data.shopCodeList[index] == this.data.defaultShopId) {
+                   console.log("set defaultShopId " + this.data.shopCodeList[index]);
+                   this.setData({
+                        shopIndex: index,
+                        defaultShopId: 0
+                   })
+                   this.toShopChanged(this.data.shopCodeList[index]);
+                   return true;
+               }
+           }
+      }
+
+      return false;
   },
 
   checkboxChange: function(e) {
@@ -137,12 +198,17 @@ Page({
                     cityList.push(res.list[index].name);
                     cityCodeList.push(res.list[index].host);
                 }
-                this.setData({
+                that.setData({
                     cityList: cityList,
                     cityCodeList: cityCodeList,
-                    cityIndex: 0
                 })
-                that.toCityChanged(cityCodeList[0]);
+
+                if(!that.setDefaultCityId()) {
+                    that.setData({
+                        cityIndex: 0
+                    })
+                    that.toCityChanged(cityCodeList[0]);
+                }
             }
         },
         fail: (res)=> {
@@ -184,12 +250,16 @@ Page({
                     areaList.push(res.list[index].areaName);
                     areaCodeList.push(res.list[index].areaId);
                 }
-                this.setData({
+                that.setData({
                     areaList: areaList,
-                    areaCodeList: areaCodeList,
-                    areaIndex: 0
+                    areaCodeList: areaCodeList
                 })
-                that.toAreaChanged(areaCodeList[0]);
+                if(!that.setDefaultAreaId()) {
+                    that.setData({
+                        areaIndex: 0
+                    })
+                    that.toAreaChanged(areaCodeList[0]);
+                }
             }
         },
         fail: (res)=> {
@@ -233,10 +303,14 @@ Page({
                 }
                 this.setData({
                     shopList: shopList,
-                    shopCodeList: shopCodeList,
-                    shopIndex: 0
+                    shopCodeList: shopCodeList
                 })
-                that.toShopChanged(shopCodeList[0]);
+                if(!that.setDefaultShopId()) {
+                   that.setData({
+                      shopIndex: 0
+                   })
+                   that.toShopChanged(shopCodeList[0]);
+                }
             } else {
               this.setData({
                   shopList: [],
