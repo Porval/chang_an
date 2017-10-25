@@ -21,7 +21,10 @@ Page({
     adList: ['/drawable/order_page_span.png'],
     agreementChecked: true,
     isCheckedAgreement: true,
-    btnStyle: 'btn-disabled'
+    btnStyle: 'btn-disabled',
+    defaultCityId: 0,
+    defaultAreaId: 0,
+    defaultShopId: 0
   },
 
   /**
@@ -38,18 +41,38 @@ Page({
   },
 
   onShow: function() {
-     var userOp = app.storage.get('agreement:');
-     if(userOp && userOp.checked) {
-        this.setData({
-            agreementChecked: true,
-            isCheckedAgreement: true,
-            btnStyle: ''
-        })  
+     var that = this;
+     wx.getLocation({
+      type: 'wgs84', 
+      success: (res) => {
+         console.log(" latitude " + res.latitude + " " + res.longitude);
+         that.setData({
+             latitude: res.latitude,
+             longitude: res.longitude
+         })
+         that.getLocationInfo();
+      }
+     })
+  },
 
-        app.storage.set('agreement:', {
-            checked: false
-        })
-     }
+  getLocationInfo() {
+      var that = this;
+      this.service({
+          api: '/testdrive/distance.ashx',
+          origin: 'pre',
+          query: {
+            lon: that.data.longitude,
+            lat:  that.data.latitude
+          },
+          success: (res) => {
+             if(res.list && res.list.length > 0) {
+                  that.setData({
+                      defaultCityId: res.list[0].id
+                  })
+                  that.setDefaultCityId();
+             }
+          }
+      });   
   },
 
   checkboxChange: function(e) {

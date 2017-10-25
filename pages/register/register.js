@@ -41,7 +41,8 @@ Page({
     second: 60,
     btnText: "获取验证码",
     btnStyle: "zan-btn--primary",
-    submitBtnStyle: 'btn-disabled'
+    submitBtnStyle: 'btn-disabled',
+    defaultCityId: 0
   },
 
   /**
@@ -49,6 +50,7 @@ Page({
    */
   onLoad: function (options) {
     this.service = service(app);
+    var that = this;
 
     this.service({
         api: '/app/official/getAllHost.ashx',
@@ -64,6 +66,7 @@ Page({
                     area: areaList,
                     areaCode: areaCodeList
                 })
+                that.setDefaultCityId();
             }
             console.log("get area list " + res);
         },
@@ -77,6 +80,55 @@ Page({
             })
         } 
     });
+
+    wx.getLocation({
+        type: 'wgs84', 
+        success: (res) => {
+           console.log(" latitude " + res.latitude + " " + res.longitude);
+           that.setData({
+               latitude: res.latitude,
+               longitude: res.longitude
+           })
+           that.getLocationInfo();
+        }
+     })
+  },
+
+  getLocationInfo() {
+      var that = this;
+      this.service({
+          api: '/testdrive/distance.ashx',
+          origin: 'pre',
+          query: {
+            lon: that.data.longitude,
+            lat: that.data.latitude
+          },
+          success: (res) => {
+             console.log(res);
+             if(res.list && res.list.length > 0) {
+                  that.setData({
+                      defaultCityId: res.list[0].hostId
+                  })
+                  that.setDefaultCityId();
+             }
+          }
+      });   
+  },
+
+  setDefaultCityId: function() {
+      if(this.data.area 
+        && this.data.area.length > 0 
+        && this.data.defaultCityId > 0) {
+           for(var index in this.data.areaCode) {
+               if(this.data.areaCode[index] == this.data.defaultCityId) {
+                   console.log("set defaultCityId " + this.data.defaultCityId);
+                   this.setData({
+                        areaIndex: index,
+                        defaultCityId: 0
+                   })
+               }
+           }
+      }
   },
 
   phoneInput: function(e) {
