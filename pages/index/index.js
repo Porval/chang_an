@@ -49,14 +49,15 @@ Page({
     })
   },
   onLoad: function (options) {
-    //test code
-    var location = {
-        defaultCityId: 2,
-        defaultAreaId: 18,
-        defaultShopId: 7
-    };
-    app.storage.set('defaultLocation:', location);
-
+    if(options && options.hostId && options.hostId > 0) {
+       var location = {
+          defaultCityId: options.hostId,
+          defaultAreaId: options.areaId,
+          defaultShopId: options.storeId
+       };
+      app.storage.set('defaultLocation:', location);
+    }
+    
     if (app.globalData.hasToken) {
        wx.redirectTo({
           url: '../identifyResult/identifyResult'
