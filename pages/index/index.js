@@ -48,11 +48,19 @@ Page({
       url: '../register/register'
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    //test code
+    var location = {
+        defaultCityId: 2,
+        defaultAreaId: 18,
+        defaultShopId: 7
+    };
+    app.storage.set('defaultLocation:', location);
+
     if (app.globalData.hasToken) {
        wx.redirectTo({
-                url: '../identifyResult/identifyResult'
-        }) 
+          url: '../identifyResult/identifyResult'
+       }) 
     }
 
     this.service = service(app);

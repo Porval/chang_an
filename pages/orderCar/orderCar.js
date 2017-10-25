@@ -38,21 +38,32 @@ Page({
       })
       this.loadCityList();
       this.loadAds();
-  },
-
-  onShow: function() {
-     var that = this;
-     wx.getLocation({
-      type: 'wgs84', 
-      success: (res) => {
-         console.log(" latitude " + res.latitude + " " + res.longitude);
-         that.setData({
-             latitude: res.latitude,
-             longitude: res.longitude
-         })
-         that.getLocationInfo();
+      
+      var location = app.storage.get('defaultLocation:');
+      console.log(location);
+      if(location && location.defaultCityId 
+            && location.defaultCityId > 0) {
+          this.setData({
+                defaultCityId: location.defaultCityId,
+                defaultAreaId: location.defaultAreaId,
+                defaultShopId: location.defaultShopId
+          })
+          app.storage.set('defaultLocation:', null);
+          this.setDefaultCityId();
+      } else {
+        var that = this;
+        wx.getLocation({
+        type: 'wgs84', 
+        success: (res) => {
+           console.log(" latitude " + res.latitude + " " + res.longitude);
+           that.setData({
+               latitude: res.latitude,
+               longitude: res.longitude
+           })
+           that.getLocationInfo();
+          }
+        })
       }
-     })
   },
 
   getLocationInfo() {
