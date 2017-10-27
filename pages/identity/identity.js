@@ -41,8 +41,8 @@ Page({
             vStats: vData.vStatus,
             canEdit: vData.vStatus == 3,
             btnStyle: 'btn-disabled',
-            uploadImageOne: vData.urlOne,
-            uploadImageTwo: vData.urlTwo,
+            uploadImageOne: vData.urlTwo,
+            uploadImageTwo: vData.urlOne,
             accountName: vData.accountName,
             identityNumber: vData.certifyNum,
             gerenalIndex: vData.sex == 1 ? 1 : 2
