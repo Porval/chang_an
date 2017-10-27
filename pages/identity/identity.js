@@ -303,7 +303,7 @@ Page({
  sumbitSuccess: function() {
     if(this.data.from == 'register') {
         wx.redirectTo({
-          url: '../driverIdentity/driverIdentity?from=register&name=' + that.data.accountName
+          url: '../driverIdentity/driverIdentity?from=register&name=' + this.data.accountName
         })
     } else {
         wx.navigateBack(1);

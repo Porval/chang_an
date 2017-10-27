@@ -16,8 +16,8 @@ var extend = require('./extend');
 var each = require('./each');
 
 var ORIGIN_MAP = {
-  service: 'http://catest.app.ccclubs.com',
-  pre: 'https://pre.tdrive.changan.ccclubs.com',
+  service: 'https://app.changan.ccclubs.com',
+  pre: 'https://tdrive.changan.ccclubs.com',
   dm: 'https://dm-51.data.aliyun.com'
 };
 
