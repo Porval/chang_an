@@ -41,8 +41,8 @@ Page({
             vStats: vData.vStatus,
             canEdit: vData.vStatus == 3,
             btnStyle: 'btn-disabled',
-            uploadImageOne: vData.urlTwo,
-            uploadImageTwo: vData.urlOne,
+            uploadImageOne: this.formatImageUrl(vData.urlTwo),
+            uploadImageTwo: this.formatImageUrl(vData.urlOne),
             accountName: vData.accountName,
             identityNumber: vData.certifyNum,
             gerenalIndex: vData.sex == 1 ? 1 : 2
@@ -298,6 +298,13 @@ Page({
              that.sumbitSuccess();
         }
     });
+ },
+
+ formatImageUrl: function(url) {
+    if(url && !url.startsWith("https") && url.startsWith("http")) {
+        return url.replace("http", "https");
+    }
+    return url;
  },
 
  sumbitSuccess: function() {

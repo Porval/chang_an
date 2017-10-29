@@ -49,8 +49,8 @@ Page({
        if(vData.vStatus == 1 || vData.vStatus == 2 || vData.vStatus == 3) {
           this.setData({
             vStats: vData.vStatus,
-            uploadImageOne: vData.urlOne,
-            uploadImageTwo: vData.urlTwo,
+            uploadImageOne: this.formatImageUrl(vData.urlOne),
+            uploadImageTwo: this.formatImageUrl(vData.urlTwo),
             driverIdentityNumber: vData.driverNum,
             driverIdentityStartDate: vData.driverStartDate,
             driverIdentityEndDate: vData.driverEndDate,
@@ -272,6 +272,13 @@ Page({
           }
       });
   },
+
+   formatImageUrl: function(url) {
+    if(url && !url.startsWith("https") && url.startsWith("http")) {
+        return url.replace("http", "https");
+    }
+    return url;
+   },
 
   checkIdentifyNumber: function(identityNumber) {
    var reg2 = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
