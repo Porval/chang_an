@@ -74,7 +74,8 @@ Page({
         title: "加载中..."
     })
     this.service({
-      api: '/app/official/getWeixinConfig.ashx',
+      origin: 'pre',
+      api: '/testdrive/getWeixinConfig.ashx',
       query: {
         access_token: app.getAccessToken()
       },

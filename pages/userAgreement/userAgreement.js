@@ -21,7 +21,8 @@ Page({
         title: "加载中..."
     })
     this.service({
-      api: '/app/official/getWeixinProtocol.ashx',
+      api: '/testdrive/getWeixinProtocol.ashx',
+      origin: 'pre',
       query: {
         type: 2
       },

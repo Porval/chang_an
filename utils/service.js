@@ -83,6 +83,10 @@ module.exports = function (app) {
           }
         },
         fail: (res) => {
+          wx.hideLoading();
+          wx.showToast({
+              title: "服务器错误"
+          });
           fail({
             type: 'wx:request',
             msg: res.errMsg,

@@ -335,12 +335,16 @@ Page({
               wx.showToast({
                 title: "该区域暂无4S门店"
               })
+
+              wx.hideLoading();
             }
         },
         fail: (res)=> {
             wx.showToast({
                 title: "获取信息失败"
             })
+
+            wx.hideLoading();
 
             wx.reLaunch({
               url: "./index/index"
