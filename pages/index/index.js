@@ -49,13 +49,18 @@ Page({
     })
   },
   onLoad: function (options) {
-    if(options && options.hostId && options.hostId > 0) {
+    console.log('options ' + JSON.stringify(options));
+    //options.scene = encodeURI("city=12&area=15&store=122");
+    if(options.scene) {
+       var query = decodeURIComponent(options.scene);
+       var map = this.parseQuery(query);
        var location = {
-          defaultCityId: options.hostId,
-          defaultAreaId: options.areaId,
-          defaultShopId: options.storeId
+          defaultCityId: map["city"],
+          defaultAreaId: map["area"],
+          defaultShopId: map["store"]
        };
       app.storage.set('defaultLocation:', location);
+      console.log('location query ' + JSON.stringify(location));
     }
     
     if (app.globalData.hasToken) {
@@ -65,5 +70,14 @@ Page({
     }
 
     this.service = service(app);
+  },
+  
+  parseQuery: function(query) {
+      var reg = /([^=&\s]+)[=\s]*([^=&\s]*)/g;
+      var obj = {};
+      while(reg.exec(query)){
+          obj[RegExp.$1] = RegExp.$2;
+      }
+      return obj;
   }
 })

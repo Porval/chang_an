@@ -394,6 +394,21 @@ Page({
                     })
                     that.checkUnRateOrder();
                 }
+            } else {
+              this.setData({
+                  shopList: [],
+                  shopCodeList: [],
+                  shopIndex: 0,
+                  carList: [],
+                  carCodeList: [],
+                  carIndex: 0
+              })
+
+              wx.showToast({
+                title: "该4S店无可用车型"
+              })
+
+              wx.hideLoading();
             }
         },
         fail: (res)=> {
@@ -436,8 +451,8 @@ Page({
      };
      var dbId = app.db.set(vOrder);
      wx.navigateTo({
-        url: '../agreement/agreement?toSubmit=true&&dbId=' + dbId,
-     })
+         url: '../agreement/agreement?toSubmit=true&&dbId=' + dbId,
+      })
     }
   },
 
